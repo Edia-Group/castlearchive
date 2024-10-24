@@ -1,5 +1,12 @@
-# Build and Deploy a Full Stack E-Commerce App with an Admin Dashboard & CMS in 2024 | Next 14, Stripe
-![e-commerce](https://i.ibb.co/Y3Hsth3/YT-Thumbnails-3.png)
+NO READ.ME PIPPO SEI PESSIMO :(
 
-### [🌟 Become a top 1% Next.js 14 developer in only one course](https://jsmastery.pro/next14)
-### [🚀 Land your dream programming job in 6 months](https://jsmastery.pro/masterclass)
+
+primo ENV del drive da aggiungere sulla cartella ecomm
+
+secondo ENV del drive da aggiungere sulla cartella ecomm-storefront
+
+cd ecomm
+
+medusa develop 
+
+ENJOY :D
