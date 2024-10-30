@@ -25,28 +25,8 @@ const ADMIN_CORS = process.env.ADMIN_CORS || "http://localhost:7000,http://local
 const STORE_CORS = process.env.STORE_CORS || "http://localhost:8000";
 const DATABASE_URL = process.env.DATABASE_URL || "postgres://localhost/medusa-starter-default";
 const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
-const isDev = process.env.NODE_ENV === 'dev'; // Use local redis docker container in development to reduce cloud upstash Redis usage. 
+const isDev = process.env.NODE_ENV === 'dev'; 
 
-// Common Redis options to optimize connections
-const commonRedisConfig = {
-  tls: !isDev,
-  maxRetriesPerRequest: 1,
-  enableOfflineQueue: false,
-  commandTimeout: 5000,
-  maxConnections: 5,
-  keepAlive: 60000,
-  connectTimeout: 10000,
-  lazyConnect: true,
-  showFriendlyErrorStack: isDev,
-  retryStrategy: (times) => {
-    if (times > 2) return null;
-    return Math.min(times * 2000, 10000);
-  },
-  reconnectOnError: (err) => {
-    const targetError = 'READONLY';
-    return err.message.includes(targetError);
-  }
-};
 
 const plugins = [
   `medusa-fulfillment-manual`,
@@ -78,36 +58,22 @@ const plugins = [
 ];
 
 
+const commonRedisConfig = {
+  tls: !isDev,
+};
+
 const modules = {
   eventBus: isDev ? {
-    resolve: "@medusajs/event-bus-local"  // Use local event bus in development
+    resolve: "@medusajs/event-bus-local"
   } : {
-    resolve: "@medusajs/event-bus-redis",
+    resolve: "@medusajs/event-bus-redis", // This is mandatory for sengrid plugin to work. TODO setup custom redis-stack server
     options: {
       redisUrl: process.env.EVENTS_REDIS_URL,
       ...commonRedisConfig,
-      healthCheckInterval: 60000,
-      lockDuration: 60000,
-      pollInterval: 5000,
-      maxPollingAttempts: 3,
-      subscriberDefinitions: {},
     },
   },
-  cacheService: isDev ? {
-    resolve: "@medusajs/cache-inmemory"  // Use in-memory cache in development
-  } : {
-    resolve: "@medusajs/cache-redis",
-    options: {
-      redisUrl: process.env.CACHE_REDIS_URL,
-      ...commonRedisConfig,
-      ttl: 300,
-      keyPrefix: "cache:",
-      maxMemoryPolicy: 'allkeys-lru',
-      disableKeepAlive: true,
-      lazyConnect: true,
-      maxLoadingRetryTime: 2000,
-      noDelay: true
-    },
+  cacheService: {
+    resolve: "@medusajs/cache-inmemory"
   },
 };
 
@@ -120,28 +86,19 @@ const projectConfig = {
   store_cors: STORE_CORS,
   database_url: DATABASE_URL,
   admin_cors: ADMIN_CORS,
-  redis_url: REDIS_URL,
   database_type: "postgres",
-  database_extra: {
-    ssl: {
-      rejectUnauthorized: false
-    }
+  database_extra: { 
+    ssl: { 
+      rejectUnauthorized: false 
+    } 
   },
+  redis_url: REDIS_URL,
   redis_options: {
     ...commonRedisConfig,
     keyPrefix: "medusa:",
-    scripts: {}, 
-    connectionPool: {
-      min: 1,
-      max: 3,
-      acquireTimeoutMillis: 5000,
-      createTimeoutMillis: 5000,
-      idleTimeoutMillis: 30000,
-      reapIntervalMillis: 1000,
-      createRetryIntervalMillis: 200,
-    }
   }
 };
+
 
 /** @type {import('@medusajs/medusa').ConfigModule} */
 module.exports = {
