@@ -25,7 +25,7 @@ const ADMIN_CORS = process.env.ADMIN_CORS || "http://localhost:7000,http://local
 const STORE_CORS = process.env.STORE_CORS || "http://localhost:8000";
 const DATABASE_URL = process.env.DATABASE_URL || "postgres://localhost/medusa-starter-default";
 const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
-const isDev = process.env.NODE_ENV === 'dev'; 
+const isDev = process.env.NODE_ENV === 'development'; 
 
 
 const plugins = [
@@ -92,11 +92,13 @@ const projectConfig = {
       rejectUnauthorized: false 
     } 
   },
+  /*  COMMENT OUT IN DEV FOR NOW
   redis_url: REDIS_URL,
   redis_options: {
     ...commonRedisConfig,
     keyPrefix: "medusa:",
   }
+  */
 };
 
 
