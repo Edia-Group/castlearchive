@@ -20,6 +20,7 @@
       "@modules/*": ["modules/*"],
       "@assets/*": ["assets/*"],
       "@pages/*": ["pages/*"],
+      "@/*": ["./src/*"]
     },
     "plugins": [
       {

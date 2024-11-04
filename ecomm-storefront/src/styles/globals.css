@@ -110,3 +110,20 @@
     @apply text-[32px] leading-[44px] font-semibold;
   }
 }
+@keyframes gridMove {
+  0% {
+    transform: perspective(1000px) rotateX(-20deg) translateY(-40%);
+  }
+  100% {
+    transform: perspective(1000px) rotateX(-20deg) translateY(0%);
+  }
+}
+
+.grid-container {
+  background: linear-gradient(0deg, #1a0f2e 0%, #4a2b7a 100%);
+  animation: gridMove 8s linear infinite;
+}
+
+.grid-lines {
+  stroke-linecap: square;
+}

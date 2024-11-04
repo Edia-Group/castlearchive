@@ -71,6 +71,10 @@ module.exports = {
         ],
       },
       keyframes: {
+        'grid-scroll': {
+          '0%': { transform: 'rotateX(45deg) translateY(0)' },
+          '100%': { transform: 'rotateX(45deg) translateY(50%)' }
+        },
         ring: {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
@@ -141,7 +145,11 @@ module.exports = {
           "100%": { transform: "translateY(0)" },
         },
       },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
       animation: {
+        'grid-scroll': 'grid-scroll 20s linear infinite',
         ring: "ring 2.2s cubic-bezier(0.5, 0, 0.5, 1) infinite",
         "fade-in-right":
           "fade-in-right 0.3s cubic-bezier(0.5, 0, 0.5, 1) forwards",

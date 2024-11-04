@@ -69,7 +69,7 @@ export default async function Home({
   return (
     <>
       {/* <Hero /> */ } 
-      <div className="pb-6 bg-[#DFD1B3]">
+      <div className="pb-6 bg-transparent">
         <ul className="flex flex-col gap-x-6">
           <FeaturedProducts collections={collections} region={region} />
         </ul>

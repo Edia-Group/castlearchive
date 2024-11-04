@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import "styles/globals.css"
+import SynthwaveGrid from "@modules/synthwavegrid/SynthwaveGrid"
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:8000"
 
@@ -9,9 +10,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-mode="light">
-      <body className="bg-[#DFD1B3]">
-        <main className="relative bg-[#DFD1B3]">{props.children}</main>
+    <html lang="en" data-mode="light" className="bg-transparent" suppressHydrationWarning>
+      <body className="bg-transparent">
+        <SynthwaveGrid />
+        <main className="relative bg-transparent">{props.children}</main>
       </body>
     </html>
   )
