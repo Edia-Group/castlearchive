@@ -1,12 +1,11 @@
+import ButtonProduct from "../button-product"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import PreviewPrice from "./price"
 import { ProductPreviewType } from "types/global"
 import { Region } from "@medusajs/medusa"
-import { Text } from "@medusajs/ui"
 import Thumbnail from "../thumbnail"
 import { getProductPrice } from "@lib/util/get-product-price"
 import { retrievePricedProductById } from "@lib/data"
-import ButtonProduct from "../button-product"
 
 export default async function ProductPreview({
   productPreview,
@@ -43,11 +42,16 @@ export default async function ProductPreview({
           isFeatured={isFeatured}
           className="bg-transparent"
         />
-        <div className="flex flex-col text-def-60 items-center mt-6">
+        <div className="flex flex-col text-[#691C73] items-center mt-6">
           <div className="mb-3 text-4xl">{productPreview.title}</div>
-          <div className="text-black text-2xl text-def-50">{cheapestPrice && <PreviewPrice price={cheapestPrice} />}</div>
-          <div>
-          <ButtonProduct></ButtonProduct>
+          <div className="text-[#7BA7CE] text-2xl">
+            {cheapestPrice && <PreviewPrice price={cheapestPrice} />}
+          </div>
+          <div className="mt-2">
+            <ButtonProduct 
+              buttonText="ADD TO CART"
+              aria-label={`Add ${productPreview.title} to cart`}
+            />
           </div>
         </div>
       </div>
