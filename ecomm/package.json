@@ -40,7 +40,7 @@
     "medusa-fulfillment-manual": "1.1.41",
     "medusa-interfaces": "1.3.10",
     "medusa-payment-manual": "1.0.25",
-    "medusa-payment-stripe": "6.0.11",
+    "medusa-payment-stripe": "^6.0.11",
     "medusa-plugin-segment": "^1.3.8",
     "medusa-plugin-sendgrid": "^1.3.13",
     "prism-react-renderer": "^2.0.4",
