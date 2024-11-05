@@ -6,6 +6,7 @@ import { Text } from "@medusajs/ui"
 import Thumbnail from "../thumbnail"
 import { getProductPrice } from "@lib/util/get-product-price"
 import { retrievePricedProductById } from "@lib/data"
+import ButtonProduct from "../button-product"
 
 export default async function ProductPreview({
   productPreview,
@@ -41,11 +42,10 @@ export default async function ProductPreview({
           size="full"
           isFeatured={isFeatured}
         />
-        <div className="flex txt-compact-medium mt-4 justify-between">
-          <Text className="text-md" data-testid="product-title">{productPreview.title}</Text>
-          <div className="flex items-center gap-x-2">
-            {cheapestPrice && <PreviewPrice price={cheapestPrice} />}
-          </div>
+        <div className="flex flex-col items-center mt-3">
+          <div>{productPreview.title}</div>
+          <div>{cheapestPrice && <PreviewPrice price={cheapestPrice} />}</div>
+          <ButtonProduct></ButtonProduct>
         </div>
       </div>
     </LocalizedClientLink>

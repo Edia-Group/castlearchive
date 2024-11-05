@@ -34,6 +34,10 @@ module.exports = {
           80: "#1F2937",
           90: "#111827",
         },
+        fuchsia: {
+          0: "#e879f9",
+          10: "#a855f7",
+        },
       },
       borderRadius: {
         none: "0px",
