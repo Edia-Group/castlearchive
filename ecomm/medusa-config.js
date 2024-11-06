@@ -88,9 +88,20 @@ const getRedisConfig = () => {
   return {
     url: process.env.REDIS_URL,
     options: {
-      tls: true,
+      tls: false,
       keyPrefix: "medusa:",
-      rejectUnauthorized: false
+      maxRetriesPerRequest: 3,
+      retryStrategy: function(times) {
+        return Math.min(times * 50, 2000);
+      },
+      reconnectOnError: function(err) {
+        return true;
+      },
+      enableReadyCheck: false,
+      keepAlive: 10000,
+      connectTimeout: 20000,
+      autoResubscribe: true,
+      autoResendUnfulfilledCommands: true
     }
   };
 };
