@@ -1,29 +1,22 @@
-FROM node:18-bullseye-slim
+FROM node:latest
 
 WORKDIR /ecomm
 
-# Install only essential dependencies
-RUN apt-get update && apt-get install -y \
-    python3 \
-    wget \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy package files
-COPY package.json yarn.lock ./
-
-# Install dependencies
-RUN yarn global add @medusajs/medusa-cli
-RUN yarn install
-
-# Copy the rest of the application
 COPY . .
 
-# Build the application
+RUN apt-get update && apt-get install -y python3 python3-pip python-is-python3
+
+RUN yarn global add @medusajs/medusa-cli
+
+RUN yarn
+
 RUN yarn build
 
-# Create uploads directory
-RUN mkdir -p uploads dist
-
+# Expose both backend and admin ports
 EXPOSE 9000 7001
 
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=2 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:9000/health || exit 1
+
+# Start the service
 CMD ["yarn", "start"]
