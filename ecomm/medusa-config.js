@@ -37,14 +37,14 @@ const plugins = [
     options: {
       upload_dir: "uploads",
     },
-  },
+  },/** 
   {
     resolve: `medusa-payment-stripe`,
     options: {
       api_key: process.env.STRIPE_API_KEY,
       webhook_secret: process.env.STRIPE_WEBHOOK_SECRET,
     },
-  },
+  }, */
   {
     resolve: "@medusajs/admin",
     /** @type {import('@medusajs/admin').PluginOptions} */
@@ -54,7 +54,7 @@ const plugins = [
         open: process.env.OPEN_BROWSER !== "false",
       },
     },
-  },
+  }, /** 
   {
     resolve: `medusa-plugin-sendgrid`,
     options: {
@@ -62,7 +62,7 @@ const plugins = [
       from: "giannnlaa@gmail.com",
       order_placed_template: "d-e69e46b356e7493c8dd7d0b692828f38",
     },
-  },
+  },*/
 ];
 
 // Redis configuration based on environment
@@ -131,11 +131,7 @@ const getEventBusConfig = () => {
 const modules = {
   eventBus: getEventBusConfig(),
   cacheService: {
-    resolve: "@medusajs/cache-redis",  // Change from cache-inmemory to cache-redis
-    options: {
-      redisUrl: redisConfig?.url,
-      redisOptions: redisConfig?.options
-    }
+    resolve: "@medusajs/cache-inmemory"
   }
 };
 
