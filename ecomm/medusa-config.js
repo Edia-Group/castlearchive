@@ -7,6 +7,10 @@ try {
 const ADMIN_CORS = process.env.ADMIN_CORS || "http://localhost:7000,http://localhost:7001";
 const STORE_CORS = process.env.STORE_CORS || "http://localhost:8000";
 const DATABASE_URL = process.env.DATABASE_URL;
+const REDIS_URL = process.env.REDIS_URL;
+
+// Keep development mode internally to avoid plugin registration issues
+process.env.NODE_ENV = 'development';
 
 const plugins = [
   `medusa-fulfillment-manual`,
@@ -26,7 +30,6 @@ const plugins = [
       },
     },
   },
-  // Adding back Stripe
   {
     resolve: `medusa-payment-stripe`,
     options: {
@@ -34,7 +37,6 @@ const plugins = [
       webhook_secret: process.env.STRIPE_WEBHOOK_SECRET,
     },
   },
-  // Adding back SendGrid
   {
     resolve: `medusa-plugin-sendgrid`,
     options: {
@@ -45,14 +47,41 @@ const plugins = [
   }
 ];
 
-// Development-like module configuration
-const modules = {
-  eventBus: {
-    resolve: "@medusajs/event-bus-local"
-  },
-  cacheService: {
-    resolve: "@medusajs/cache-inmemory"
+// Configure Redis-based modules if REDIS_URL is available
+const getModules = () => {
+  if (REDIS_URL) {
+    return {
+      eventBus: {
+        resolve: "@medusajs/event-bus-redis",
+        options: {
+          redisUrl: REDIS_URL,
+          options: {
+            tls: false,
+            maxRetriesPerRequest: 3,
+            retryStrategy: function(times) {
+              return Math.min(times * 50, 2000);
+            }
+          }
+        }
+      },
+      cacheService: {
+        resolve: "@medusajs/cache-redis",
+        options: {
+          redisUrl: REDIS_URL,
+          ttl: 30
+        }
+      }
+    };
   }
+  
+  return {
+    eventBus: {
+      resolve: "@medusajs/event-bus-local"
+    },
+    cacheService: {
+      resolve: "@medusajs/cache-inmemory"
+    }
+  };
 };
 
 const projectConfig = {
@@ -69,13 +98,15 @@ const projectConfig = {
   }
 };
 
-// Override process.env.NODE_ENV internally
-process.env.NODE_ENV = 'development';
+// Add Redis URL to project config if available
+if (REDIS_URL) {
+  projectConfig.redis_url = REDIS_URL;
+}
 
 module.exports = {
   projectConfig,
   plugins,
-  modules,
+  modules: getModules(),
   featureFlags: {
     product_categories: true,
   },
