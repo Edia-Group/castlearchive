@@ -4,12 +4,11 @@ try {
   dotenv.config();
 } catch (e) {}
 
-const ADMIN_CORS = process.env.ADMIN_CORS || "http://localhost:7000,http://localhost:7001";
-const STORE_CORS = process.env.STORE_CORS || "http://localhost:8000";
+const ADMIN_CORS = process.env.ADMIN_CORS || "https://coolify.carlsrl.it,https://coolify.carlsrl.it/antonioecommerce";
+const STORE_CORS = process.env.STORE_CORS || "https://coolify.carlsrl.it,https://coolify.carlsrl.it/antonioecommerce";
 const DATABASE_URL = process.env.DATABASE_URL;
 const REDIS_URL = process.env.REDIS_URL;
 
-// Keep development mode internally to avoid plugin registration issues
 process.env.NODE_ENV = 'development';
 
 const plugins = [
@@ -18,7 +17,7 @@ const plugins = [
   {
     resolve: `@medusajs/file-local`,
     options: {
-      upload_dir: "uploads",
+      upload_dir: "/ecomm/uploads",  // Updated path
     },
   },
   {
@@ -28,6 +27,12 @@ const plugins = [
       develop: {
         open: false,
       },
+      serve: true,
+      outDir: "/ecomm/dist/admin",           // Add explicit output directory
+      path: "/antonioecommerce/app",         // Keep this for routing
+      publicUrl: "/antonioecommerce/app/",   // Keep this for routing
+      buildDir: "/ecomm/build",              // Add explicit build directory
+      assetDir: "/ecomm/dist/admin/assets"   // Add explicit asset directory
     },
   },
   {
@@ -47,7 +52,6 @@ const plugins = [
   }
 ];
 
-// Configure Redis-based modules if REDIS_URL is available
 const getModules = () => {
   if (REDIS_URL) {
     return {
@@ -95,10 +99,19 @@ const projectConfig = {
     ssl: { 
       rejectUnauthorized: false 
     } 
+  },
+  base_dir: "/ecomm",                    // Add base directory
+  path: "/antonioecommerce",
+  admin: {
+    path: "/antonioecommerce/app",
+    serve: true,
+    outDir: "/ecomm/dist/admin",         // Match the plugin config
+    publicUrl: "/antonioecommerce/app/",
+    buildDir: "/ecomm/build",            // Match the plugin config
+    assetDir: "/ecomm/dist/admin/assets" // Match the plugin config
   }
 };
 
-// Add Redis URL to project config if available
 if (REDIS_URL) {
   projectConfig.redis_url = REDIS_URL;
 }
