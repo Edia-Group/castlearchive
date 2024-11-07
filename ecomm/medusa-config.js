@@ -131,7 +131,11 @@ const getEventBusConfig = () => {
 const modules = {
   eventBus: getEventBusConfig(),
   cacheService: {
-    resolve: "@medusajs/cache-inmemory"
+    resolve: "@medusajs/cache-redis",  // Change from cache-inmemory to cache-redis
+    options: {
+      redisUrl: redisConfig?.url,
+      redisOptions: redisConfig?.options
+    }
   }
 };
 
