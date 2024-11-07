@@ -17,9 +17,6 @@ COPY . .
 # Build the application
 RUN yarn build
 
-# Set production environment
-ENV NODE_ENV production
-
 # Expose both backend and admin ports
 EXPOSE 9000 7001
 
