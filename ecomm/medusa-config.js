@@ -17,22 +17,17 @@ const plugins = [
   {
     resolve: `@medusajs/file-local`,
     options: {
-      upload_dir: "/ecomm/uploads",  // Updated path
+      upload_dir: "/ecomm/uploads",
     },
   },
   {
     resolve: "@medusajs/admin",
     options: {
       autoRebuild: false,
-      develop: {
-        open: false,
-      },
       serve: true,
-      outDir: "/ecomm/dist/admin",           // Add explicit output directory
-      path: "/antonioecommerce/app",         // Keep this for routing
-      publicUrl: "/antonioecommerce/app/",   // Keep this for routing
-      buildDir: "/ecomm/build",              // Add explicit build directory
-      assetDir: "/ecomm/dist/admin/assets"   // Add explicit asset directory
+      path: "/",              // Changed to root since Traefik handles the path
+      publicUrl: "/",         // Changed to root
+      outDir: "dist/admin"    // Changed to relative path
     },
   },
   {
@@ -100,16 +95,14 @@ const projectConfig = {
       rejectUnauthorized: false 
     } 
   },
-  base_dir: "/ecomm",                    // Add base directory
-  path: "/antonioecommerce",
   admin: {
-    path: "/antonioecommerce/app",
     serve: true,
-    outDir: "/ecomm/dist/admin",         // Match the plugin config
-    publicUrl: "/antonioecommerce/app/",
-    buildDir: "/ecomm/build",            // Match the plugin config
-    assetDir: "/ecomm/dist/admin/assets" // Match the plugin config
-  }
+    path: "/",          // Changed to root
+    outDir: "dist/admin", // Changed to relative path
+    publicUrl: "/"      // Changed to root
+  },
+  // Setting these to root since Traefik handles the paths
+  path: "/"
 };
 
 if (REDIS_URL) {
