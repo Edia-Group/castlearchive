@@ -101,7 +101,8 @@ const getRedisConfig = () => {
       keepAlive: 10000,
       connectTimeout: 20000,
       autoResubscribe: true,
-      autoResendUnfulfilledCommands: true
+      autoResendUnfulfilledCommands: true,
+      port: 6380
     }
   };
 };
