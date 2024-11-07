@@ -5,16 +5,15 @@ WORKDIR /ecomm
 # Install system dependencies
 RUN apk add --no-cache python3 make g++
 
-# Copy package files
-COPY package.json yarn.lock ./
-
-# Install dependencies with yarn
-RUN yarn install --frozen-lockfile
-
 # Copy application files
 COPY . .
 
-# Build the application
+RUN apt-get update && apt-get install -y python3 python3-pip python-is-python3
+
+RUN yarn global add @medusajs/medusa-cli
+
+RUN yarn
+
 RUN yarn build
 
 # Expose both backend and admin ports
