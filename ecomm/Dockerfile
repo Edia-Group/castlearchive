@@ -2,10 +2,6 @@ FROM node:latest
 
 WORKDIR /ecomm
 
-# Install system dependencies
-RUN apk add --no-cache python3 make g++
-
-# Copy application files
 COPY . .
 
 RUN apt-get update && apt-get install -y python3 python3-pip python-is-python3
