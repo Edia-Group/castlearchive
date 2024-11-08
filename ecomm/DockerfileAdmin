@@ -1,6 +1,6 @@
 FROM node:18-alpine
 
-WORKDIR /app
+WORKDIR /ecomm
 
 COPY package.json yarn.lock ./
 
@@ -15,4 +15,4 @@ EXPOSE 7001
 RUN yarn global add serve
 
 # Start the application
-CMD ["yarn", "serve", "-s", "dist/admin", "-l", "7001"]
+CMD ["yarn", "serve:admin"]
