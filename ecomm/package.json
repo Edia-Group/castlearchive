@@ -19,7 +19,7 @@
     "build:server": "cross-env npm run clean && tsc -p tsconfig.server.json",
     "build:admin": "cross-env medusa-admin build",
     "build:admin:deployment": "cross-env medusa-admin build --deployment",
-    "serve:admin": "serve -s dist/admin -l 7001",
+    "serve:admin": "serve -s build -l 7001",
     "watch": "cross-env tsc --watch",
     "test": "cross-env jest",
     "seed": "cross-env medusa seed -f ./data/seed.json",
