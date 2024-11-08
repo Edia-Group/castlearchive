@@ -1,9 +1,10 @@
 [phases.setup]
-nixPkgs = ['nodejs', 'yarn']
-workdir = "ecomm"
+nixPkgs = ['nodejs-20_x', 'yarn']
+aptPkgs = ['git']
+providers = ['node']
 
 [phases.install]
-cmds = ['yarn install']
+cmds = ['yarn']
 
 [phases.build]
 cmds = ['yarn build:admin:deployment']
