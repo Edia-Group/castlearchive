@@ -8,11 +8,12 @@ const STORE_CORS = process.env.STORE_CORS || "https://coolify.carlsrl.it,https:/
 const DATABASE_URL = process.env.DATABASE_URL;
 const REDIS_URL = process.env.REDIS_URL;
 
-// Get the actual NODE_ENV from environment, defaulting to 'development'
-const ENV = process.env.NODE_ENV || 'development';
-const IS_COOLIFY = ENV === 'production' || ENV === 'test';
+// Force NODE_ENV to development for core registration problem on coolify
+process.env.NODE_ENV = 'development';
 
-// Base plugins that are needed in both dev and prod
+// Use a separate env var to control admin plugin
+const IS_COOLIFY = process.env.DEPLOYMENT_ENV === 'production' || process.env.DEPLOYMENT_ENV === 'test';
+
 const basePlugins = [
   `medusa-fulfillment-manual`,
   `medusa-payment-manual`,
@@ -39,7 +40,7 @@ const basePlugins = [
   }
 ];
 
-// Add admin plugin only in development
+// Add admin plugin only when not in Coolify
 const plugins = IS_COOLIFY 
   ? basePlugins 
   : [
@@ -53,7 +54,7 @@ const plugins = IS_COOLIFY
   ];
 
 
-  const getModules = () => {
+const getModules = () => {
   if (REDIS_URL) {
     return {
       eventBus: {
@@ -117,4 +118,4 @@ module.exports = {
   featureFlags: {
     product_categories: false,
   },
-};
+};  

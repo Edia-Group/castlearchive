@@ -2,20 +2,31 @@ FROM node:latest
 
 WORKDIR /ecomm
 
+# Install dependencies first for better caching
+COPY package.json yarn.lock ./
+RUN apt-get update && apt-get install -y python3 python3-pip python-is-python3
+RUN yarn global add @medusajs/medusa-cli
+RUN yarn install
+
+# Copy the rest of the application
 COPY . .
 
-RUN apt-get update && apt-get install -y python3 python3-pip python-is-python3
-
-RUN yarn global add @medusajs/medusa-cli
-
-RUN yarn
-
+# Build the server
 RUN yarn build:prod
+
+# Create and set permissions for uploads directory
+RUN mkdir -p uploads && chown -R node:node uploads && chmod 755 uploads
+
+# Switch to node user for better security
+USER node
 
 EXPOSE 9000
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=2 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:9000/health || exit 1
+
+# Set deployment environment
+ENV DEPLOYMENT_ENV=production
 
 # Start the service
 CMD ["medusa", "start"]
