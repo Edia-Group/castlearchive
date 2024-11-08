@@ -1,0 +1,18 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package.json yarn.lock ./
+
+RUN yarn install --frozen-lockfile
+
+COPY . .
+
+RUN yarn build:admin:deployment
+
+EXPOSE 7001
+
+RUN yarn global add serve
+
+# Start the application
+CMD ["yarn", "serve", "-s", "dist/admin", "-l", "7001"]
