@@ -1,5 +1,4 @@
 const dotenv = require("dotenv");
-
 try {
   dotenv.config();
 } catch (e) {}
@@ -9,23 +8,18 @@ const STORE_CORS = process.env.STORE_CORS || "https://coolify.carlsrl.it,https:/
 const DATABASE_URL = process.env.DATABASE_URL;
 const REDIS_URL = process.env.REDIS_URL;
 
-process.env.NODE_ENV = 'development';
+// Get the actual NODE_ENV from environment, defaulting to 'development'
+const ENV = process.env.NODE_ENV || 'development';
+const IS_COOLIFY = ENV === 'production' || ENV === 'test';
 
-const plugins = [
+// Base plugins that are needed in both dev and prod
+const basePlugins = [
   `medusa-fulfillment-manual`,
   `medusa-payment-manual`,
   {
     resolve: `@medusajs/file-local`,
     options: {
       upload_dir: "uploads",
-    },
-  },
-  {
-    resolve: "@medusajs/admin",
-    /** @type {import('@medusajs/admin').PluginOptions} */
-    options: {
-      // only enable `serve` in development to start the admin alongside backend
-      serve: process.env.NODE_ENV === "development",
     },
   },
   {
@@ -45,7 +39,21 @@ const plugins = [
   }
 ];
 
-const getModules = () => {
+// Add admin plugin only in development
+const plugins = IS_COOLIFY 
+  ? basePlugins 
+  : [
+    ...basePlugins,
+    {
+      resolve: "@medusajs/admin",
+      options: {
+        serve: true,
+      },
+    }
+  ];
+
+
+  const getModules = () => {
   if (REDIS_URL) {
     return {
       eventBus: {
