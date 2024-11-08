@@ -17,22 +17,16 @@ const plugins = [
   {
     resolve: `@medusajs/file-local`,
     options: {
-      upload_dir: "/ecomm/uploads",
+      upload_dir: "uploads",
     },
   },
   {
     resolve: "@medusajs/admin",
+    /** @type {import('@medusajs/admin').PluginOptions} */
     options: {
-      autoRebuild: false,        // Set to false since we pre-built it in a Dockerfile step
-      serve: true,
-      path: "/antonioecommerce",  // Match your Coolify subdirectory
-      publicUrl: "/antonioecommerce", // Match your Coolify subdirectory
-      outDir: "dist/admin",
-      backend: {
-        loadConfig: true,
-        cors: process.env.ADMIN_CORS
-      }
-    }
+      // only enable `serve` in development to start the admin alongside backend
+      serve: process.env.NODE_ENV === "development",
+    },
   },
   {
     resolve: `medusa-payment-stripe`,
@@ -99,6 +93,9 @@ const projectConfig = {
       rejectUnauthorized: false 
     } 
   },
+  api: {
+    port: 9000
+  }
 };
 
 if (REDIS_URL) {
@@ -110,6 +107,6 @@ module.exports = {
   plugins,
   modules: getModules(),
   featureFlags: {
-    product_categories: true,
+    product_categories: false,
   },
 };

@@ -10,13 +10,12 @@ RUN yarn global add @medusajs/medusa-cli
 
 RUN yarn
 
-RUN yarn build
+RUN yarn build:prod
 
-# Expose both backend and admin ports
-EXPOSE 9000 7001
+EXPOSE 9000
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=2 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:9000/health || exit 1
 
 # Start the service
-CMD ["medusa", "develop"]
+CMD ["medusa", "start"]
