@@ -23,12 +23,16 @@ const plugins = [
   {
     resolve: "@medusajs/admin",
     options: {
-      autoRebuild: false,
+      autoRebuild: false,        // Set to false since we pre-built it in a Dockerfile step
       serve: true,
-      path: "/",              // Changed to root since Traefik handles the path
-      publicUrl: "/",         // Changed to root
-      outDir: "dist/admin"    // Changed to relative path
-    },
+      path: "/antonioecommerce",  // Match your Coolify subdirectory
+      publicUrl: "/antonioecommerce", // Match your Coolify subdirectory
+      outDir: "dist/admin",
+      backend: {
+        loadConfig: true,
+        cors: process.env.ADMIN_CORS
+      }
+    }
   },
   {
     resolve: `medusa-payment-stripe`,
@@ -95,14 +99,6 @@ const projectConfig = {
       rejectUnauthorized: false 
     } 
   },
-  admin: {
-    serve: true,
-    path: "/",          // Changed to root
-    outDir: "dist/admin", // Changed to relative path
-    publicUrl: "/"      // Changed to root
-  },
-  // Setting these to root since Traefik handles the paths
-  path: "/"
 };
 
 if (REDIS_URL) {
