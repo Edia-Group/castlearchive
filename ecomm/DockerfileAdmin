@@ -14,5 +14,27 @@ EXPOSE 7001
 
 RUN yarn global add serve
 
+RUN echo '{ \
+  "cleanUrls": false, \
+  "trailingSlash": true, \
+  "rewrites": [ \
+    { "source": "/antonioecommerce-admin-test/**", "destination": "/index.html" } \
+  ], \
+  "headers": [ \
+    { \
+      "source": "**/*.css", \
+      "headers": [{ "key": "Content-Type", "value": "text/css" }] \
+    }, \
+    { \
+      "source": "**/*.js", \
+      "headers": [{ "key": "Content-Type", "value": "application/javascript" }] \
+    }, \
+    { \
+      "source": "**/*.ttf", \
+      "headers": [{ "key": "Content-Type", "value": "font/ttf" }] \
+    } \
+  ] \
+}' > /ecomm/serve.json
+
 # Start the application
 CMD ["yarn", "serve:admin:deployment"]
