@@ -21,7 +21,7 @@
     "build:admin": "cross-env medusa-admin build",
     "build:admin:deployment": "cross-env medusa-admin build --deployment",
     "serve:admin": "serve -s build -l 7001 --single",
-    "serve:admin:deployment": "serve -s build -l 7001 --config serve.json",
+    "serve:admin:deployment": "serve -s build -l 7001",
     "watch": "cross-env tsc --watch",
     "test": "cross-env jest",
     "seed": "cross-env medusa seed -f ./data/seed.json",
