@@ -42,8 +42,8 @@ export default async function ProductPreview({
           size="full"
           isFeatured={isFeatured}
         />
-        <div className="flex flex-col items-center mt-3">
-          <div>{productPreview.title}</div>
+        <div className="flex flex-col text-fuchsia-700 items-center mt-3">
+          <div className="mb-3">{productPreview.title}</div>
           <div>{cheapestPrice && <PreviewPrice price={cheapestPrice} />}</div>
           <ButtonProduct></ButtonProduct>
         </div>

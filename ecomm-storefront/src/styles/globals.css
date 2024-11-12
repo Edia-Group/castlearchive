@@ -7,6 +7,10 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+  /* CSS for pixelation effect */
+  .pixelated {
+    image-rendering: pixelated;
+  }
 
   .no-scrollbar::-webkit-scrollbar-track {
     background-color: transparent;

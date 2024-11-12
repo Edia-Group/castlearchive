@@ -13,7 +13,7 @@ import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-relat
 import { notFound } from "next/navigation"
 import ProductActionsWrapper from "./product-actions-wrapper"
 import ProductSize from "../components/product-size"
-
+import ButtonProduct from "../components/button-product"
 type ProductTemplateProps = {
   product: PricedProduct
   region: Region
@@ -32,7 +32,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   return (
     <>
       <div
-        className="content-container flex flex-col small:flex-row small:items-start py-6 relative"
+        className="content-container flex flex-col small:flex-row small:items-start py-6 relative bg-transparent"
         data-testid="product-container"
       >
         <div className="flex flex-col size-full bg-transparent mr-7">
@@ -44,22 +44,20 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
         </Heading>
         </div>
         <div className="flex flex-col size-full bg-transparent ml-18">
-        <div className="flex flex-col">
+        <div className="flex flex-col text-black">
         <div>
         <ProductSize></ProductSize>
+        <div className="size-full">
+        <button
+      className="bg-fuchsia-10 text-white font-bold px-4 py-2 border-4 border-fuchsia-900
+                 hover:bg-fuchsia-700 active:border-fuchsia-900 transition duration-150 
+                 rounded-lg pixelated size-full"
+    >
+      ADD TO CART
+    </button>
         </div>
-          <ProductOnboardingCta />
-          <Suspense
-            fallback={
-              <ProductActions
-                disabled={true}
-                product={product}
-                region={region}
-              />
-            }
-          >
-            <ProductActionsWrapper id={product.id} region={region} />
-          </Suspense>
+        </div>
+        
         </div>
         <div className="mt-6">
         <ProductTabs product={product} />

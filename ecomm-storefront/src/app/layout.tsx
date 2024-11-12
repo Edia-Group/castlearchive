@@ -12,8 +12,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" data-mode="light" className="bg-transparent" suppressHydrationWarning>
       <body className="bg-transparent">
-        <SynthwaveGrid />
-        <main className="relative bg-transparent text-white">{props.children}</main>
+        <main className="relative text-white">{props.children}</main>
       </body>
     </html>
   )
