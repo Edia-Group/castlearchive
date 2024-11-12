@@ -3,8 +3,8 @@ try {
   dotenv.config();
 } catch (e) {}
 
-const ADMIN_CORS = process.env.ADMIN_CORS || "https://coolify.carlsrl.it,https://coolify.carlsrl.it/antonioecommerce";
-const STORE_CORS = process.env.STORE_CORS || "https://coolify.carlsrl.it,https://coolify.carlsrl.it/antonioecommerce";
+const ADMIN_CORS = process.env.ADMIN_CORS || "https://castlearchive.netlify.app";
+const STORE_CORS = process.env.STORE_CORS || "https://coolify.carlsrl.it/antonioecommerce-storefront-test";
 const DATABASE_URL = process.env.DATABASE_URL;
 const REDIS_URL = process.env.REDIS_URL;
 
@@ -104,7 +104,24 @@ const projectConfig = {
   },
   api: {
     port: 9000
+  },
+  cookie_options: {
+    secure: true,
+    sameSite: "none",
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  },
+  security: {
+    admin_auth_strategy: { 
+      api_token: {
+        enabled: false
+      },
+      cookie: {
+        enabled: true
+      }
+    }
   }
+
 };
 
 if (REDIS_URL) {

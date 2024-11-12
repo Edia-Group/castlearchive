@@ -14,5 +14,4 @@ EXPOSE 7001
 
 RUN yarn global add serve
 
-# Start the application
 CMD ["yarn", "serve:admin:deployment"]
