@@ -3,16 +3,17 @@ FROM node:18-alpine
 WORKDIR /ecomm
 
 COPY package.json yarn.lock ./
-
 RUN yarn install --frozen-lockfile
 
-COPY . .
+# Create .env file for build configuration
+RUN echo "PUBLIC_URL=." > .env
 
+COPY . .
 RUN yarn build:admin:deployment
 
 EXPOSE 7001
 
 RUN yarn global add serve
 
-# Start the application
-CMD ["yarn", "serve:admin:deployment"]
+# Configure serve for proper static file handling
+CMD ["serve", "-s", "build", "-l", "7001", "--single", "--cors", "--no-clipboard", "--trailing-slash"]
