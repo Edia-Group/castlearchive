@@ -3,11 +3,16 @@ FROM node:18-alpine
 WORKDIR /ecomm
 
 COPY package.json yarn.lock ./
+
 RUN yarn install --frozen-lockfile
 
 COPY . .
+
 RUN yarn build:admin:deployment
 
 EXPOSE 7001
 
-CMD ["node", "serve.js"]
+RUN yarn global add serve
+
+# Start the application
+CMD ["yarn", "serve:admin:deployment"]
