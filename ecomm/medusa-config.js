@@ -12,7 +12,7 @@ const REDIS_URL = process.env.REDIS_URL;
 process.env.NODE_ENV = 'development';
 
 // Use a separate env var to control admin plugin
-const IS_COOLIFY = process.env.DEPLOYMENT_ENV === 'production' || process.env.DEPLOYMENT_ENV === 'test';
+const IS_DOKPLOY = process.env.DEPLOYMENT_ENV === 'production' || process.env.DEPLOYMENT_ENV === 'test';
 
 const basePlugins = [
   `medusa-fulfillment-manual`,
@@ -40,8 +40,8 @@ const basePlugins = [
   }
 ];
 
-// Add admin plugin only when not in Coolify
-const plugins = IS_COOLIFY 
+// Add admin plugin only when not in Dokploy
+const plugins = IS_DOKPLOY 
   ? basePlugins 
   : [
     ...basePlugins,
