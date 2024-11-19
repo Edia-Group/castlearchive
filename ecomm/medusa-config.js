@@ -49,7 +49,7 @@ const plugins = IS_DOKPLOY
       resolve: "@medusajs/admin",
       options: {
         serve: true,
-        autoRebuild: true,
+        autoRebuild: false,
       },
     }
   ];
