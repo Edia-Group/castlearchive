@@ -8,12 +8,6 @@ const STORE_CORS = process.env.STORE_CORS || "https://coolify.carlsrl.it/antonio
 const DATABASE_URL = process.env.DATABASE_URL;
 const REDIS_URL = process.env.REDIS_URL;
 
-// Force NODE_ENV to development for core registration problem on coolify
-process.env.NODE_ENV = 'development';
-
-// Use a separate env var to control admin plugin
-const IS_DOKPLOY = process.env.DEPLOYMENT_ENV === 'production' || process.env.DEPLOYMENT_ENV === 'test';
-
 const basePlugins = [
   `medusa-fulfillment-manual`,
   `medusa-payment-manual`,
@@ -40,8 +34,8 @@ const basePlugins = [
   }
 ];
 
-// Add admin plugin only when not in Dokploy
-const plugins = IS_DOKPLOY == 'true'
+// Add admin plugin only when developing locally.
+const plugins = process.env.NODE_ENV == 'production'
   ? basePlugins 
   : [
     ...basePlugins,
