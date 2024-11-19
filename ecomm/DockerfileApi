@@ -12,7 +12,7 @@ RUN yarn install
 COPY . .
 
 # Build the server
-RUN yarn build:prod
+RUN yarn build:dev
 
 # Create and set permissions for uploads directory
 RUN mkdir -p uploads && chown -R node:node uploads && chmod 755 uploads
