@@ -41,7 +41,7 @@ const basePlugins = [
 ];
 
 // Add admin plugin only when not in Dokploy
-const plugins = IS_DOKPLOY 
+const plugins = IS_DOKPLOY == 'true'
   ? basePlugins 
   : [
     ...basePlugins,
