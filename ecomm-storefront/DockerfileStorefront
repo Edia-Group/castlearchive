@@ -7,8 +7,10 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+
 RUN yarn build
 
 EXPOSE 8000
 
-CMD ["node", "--max-old-space-size=4096", "node_modules/.bin/next", "start"]
+CMD ["yarn", "start"]
