@@ -34,13 +34,14 @@ export default async function ProductPreview({
   return (
     <LocalizedClientLink
       href={`/products/${productPreview.handle}`}
-      className="group"
+      className="group bg-transparent"
     >
-      <div data-testid="product-wrapper">
+      <div data-testid="product-wrapper" className="bg-transparent">
         <Thumbnail
           thumbnail={productPreview.thumbnail}
           size="full"
           isFeatured={isFeatured}
+          className="bg-transparent"
         />
         <div className="flex flex-col text-fuchsia-700 items-center mt-3">
           <div className="mb-3">{productPreview.title}</div>

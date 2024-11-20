@@ -13,7 +13,6 @@ import CountrySelect from "../country-select"
 const SideMenuItems = {
   Home: "/",
   Store: "/store",
-  Search: "/search",
   Account: "/account",
   Cart: "/cart",
 }
@@ -46,15 +45,18 @@ const SideMenu = ({ regions }: { regions: Region[] | null }) => {
                 leaveFrom="opacity-100 backdrop-blur-2xl"
                 leaveTo="opacity-0"
               >
-                <Popover.Panel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-30 inset-x-0 bg-slate-500 text-sm text-ui-fg-on-color border-black">
-                  <div data-testid="nav-menu-popup" className="flex flex-col h-full bg-[rgba(3,7,18,0.5)] justify-between">
-                    <div className="flex justify-end p-2" id="xmark">
+                <Popover.Panel className="flex flex-col absolute w-full border-2 border-black pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-30 inset-x-0 bg-def-30 text-sm text-ui-fg-on-color ">
+                  <div data-testid="nav-menu-popup" className="flex flex-col h-full justify-between ">
+                    <div className="border-black border-b-2 bg-def-20">
+                    <div className="flex justify-end p-2 " id="xmark">
                       <h1 className="mr-6 text-xl text-black">MENU</h1>
                       <button data-testid="close-menu-button" onClick={close}>
                         <XMark className="text-black"/>
                       </button>
                     </div>
-                    <div className="h-full mt-4 bg-yellow-200 p-5">
+                    </div>
+
+                    <div className="h-full mt-4 bg-def-30 p-5">
                     <ul className="flex flex-col gap-6 items-start justify-start text-black ml-5">
                       {Object.entries(SideMenuItems).map(([name, href]) => {
                         return (
@@ -75,7 +77,7 @@ const SideMenu = ({ regions }: { regions: Region[] | null }) => {
                     
                     <div className="">
                     
-                    <div className="flex flex-col gap-y-6 text-black bg-yellow-200">
+                    <div className="flex flex-col gap-y-6 text-black bg-def-30">
                       <div
                         className="flex justify-between"
                         onMouseEnter={toggleState.open}
