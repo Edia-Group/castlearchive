@@ -8,7 +8,7 @@ const STORE_CORS = process.env.STORE_CORS || "https://coolify.carlsrl.it/antonio
 const DATABASE_URL = process.env.DATABASE_URL;
 const REDIS_URL = process.env.REDIS_URL;
 
-const basePlugins = [
+const plugins = [
   `medusa-fulfillment-manual`,
   `medusa-payment-manual`,
   {
@@ -31,22 +31,20 @@ const basePlugins = [
       from: "giannnlaa@gmail.com",
       order_placed_template: "d-e69e46b356e7493c8dd7d0b692828f38",
     },
+  },
+  {
+    resolve: "@medusajs/admin",
+    options: {
+      serve: true,
+      path: "/",
+      outDir: "build",
+      autoRebuild: false,
+      develop: {
+        open: false,
+      }
+    },
   }
 ];
-
-// Add admin plugin only when developing locally.
-const plugins = process.env.NODE_ENV == 'production'
-  ? basePlugins 
-  : [
-    ...basePlugins,
-    {
-      resolve: "@medusajs/admin",
-      options: {
-        serve: true,
-        autoRebuild: false,
-      },
-    }
-  ];
 
 
 const getModules = () => {
@@ -128,7 +126,8 @@ module.exports = {
   admin: {
     disable: process.env.DISABLE_MEDUSA_ADMIN === "true",
     backendUrl: process.env.MEDUSA_BACKEND_URL,
-    path: process.env.MEDUSA_ADMIN_PATH,
+    path: "/",
+    serve: true
   },
   plugins,
   modules: getModules(),
