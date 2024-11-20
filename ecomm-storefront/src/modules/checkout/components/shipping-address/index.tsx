@@ -34,7 +34,7 @@ const ShippingAddress = ({
   })
 
   const countriesInRegion = useMemo(
-    () => cart?.region.countries.map((c) => c.iso_2),
+    () => cart?.region.countries.map((c: { iso_2: any }) => c.iso_2),
     [cart?.region]
   )
 
