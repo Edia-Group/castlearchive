@@ -8,7 +8,8 @@ const STORE_CORS = process.env.STORE_CORS || "https://coolify.carlsrl.it/antonio
 const DATABASE_URL = process.env.DATABASE_URL;
 const REDIS_URL = process.env.REDIS_URL;
 
-const plugins = [
+// Base plugins that are always needed
+const basePlugins = [
   `medusa-fulfillment-manual`,
   `medusa-payment-manual`,
   {
@@ -31,21 +32,27 @@ const plugins = [
       from: "giannnlaa@gmail.com",
       order_placed_template: "d-e69e46b356e7493c8dd7d0b692828f38",
     },
-  },
-  {
-    resolve: "@medusajs/admin",
-    options: {
-      serve: true,
-      path: "/",
-      outDir: "build",
-      autoRebuild: false,
-      develop: {
-        open: false,
-      }
-    },
   }
 ];
 
+// Conditional plugins based on environment
+const plugins = process.env.NODE_ENV === 'production' && process.env.DISABLE_MEDUSA_ADMIN === "true"
+  ? basePlugins
+  : [
+    ...basePlugins,
+    {
+      resolve: "@medusajs/admin",
+      options: {
+        serve: true,
+        path: "/",
+        outDir: "build",
+        autoRebuild: false,
+        develop: {
+          open: false,
+        }
+      },
+    }
+  ];
 
 const getModules = () => {
   if (REDIS_URL) {
@@ -83,11 +90,10 @@ const getModules = () => {
   };
 };
 
-const projectConfig = {
+// Base project config
+const baseProjectConfig = {
   jwt_secret: process.env.JWT_SECRET,
   cookie_secret: process.env.COOKIE_SECRET,
-  store_cors: STORE_CORS,
-  admin_cors: ADMIN_CORS,
   database_type: "postgres",
   database_url: DATABASE_URL,
   database_extra: { 
@@ -95,30 +101,40 @@ const projectConfig = {
       rejectUnauthorized: false 
     } 
   },
-  api: {
-    port: 9000
-  },
+  store_cors: STORE_CORS,
+  admin_cors: ADMIN_CORS,
   cookie_options: {
     secure: true,
     sameSite: "none",
     httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000 // 24 hours
-  },
-  security: {
-    admin_auth_strategy: { 
-      api_token: {
-        enabled: false
+    maxAge: 24 * 60 * 60 * 1000
+  }
+};
+
+// Conditional project config
+const projectConfig = process.env.NODE_ENV === 'production' && process.env.DISABLE_MEDUSA_ADMIN === "true"
+  ? {
+      ...baseProjectConfig,
+      api: {
+        port: 9000
       },
-      cookie: {
-        enabled: true
+      security: {
+        admin_auth_strategy: { 
+          api_token: {
+            enabled: false
+          },
+          cookie: {
+            enabled: true
+          }
+        }
       }
     }
-  },
-  admin: {
-    disable: process.env.DISABLE_MEDUSA_ADMIN === "true",
-  }
-
-};
+  : {
+      ...baseProjectConfig,
+      api: {
+        port: 7001
+      }
+    };
 
 if (REDIS_URL) {
   projectConfig.redis_url = REDIS_URL;
@@ -126,15 +142,13 @@ if (REDIS_URL) {
 
 module.exports = {
   projectConfig,
-  admin: {
-    disable: process.env.DISABLE_MEDUSA_ADMIN === "true",
-    backendUrl: process.env.MEDUSA_BACKEND_URL,
-    path: "/",
-    serve: true
-  },
   plugins,
   modules: getModules(),
   featureFlags: {
     product_categories: false,
   },
-};  
+  admin: {
+    path: "/",
+    serve: !process.env.DISABLE_MEDUSA_ADMIN || process.env.DISABLE_MEDUSA_ADMIN === "false"
+  }
+};

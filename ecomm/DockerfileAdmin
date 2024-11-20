@@ -8,10 +8,10 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
-RUN yarn build:admin:deployment
+RUN yarn build:admin:prod
 
 EXPOSE 7001
 
 RUN yarn global add serve
 
-CMD ["yarn", "serve:admin:deployment"]
+CMD ["yarn", "serve:admin:prod"]
