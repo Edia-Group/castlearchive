@@ -8,6 +8,10 @@ const nextConfig = withStoreConfig({
   features: store.features,
   reactStrictMode: true,
   images: {
+    domains: [
+      "localhost",
+      "api.carlsrl.it"
+    ],
     unoptimized: true, // This is for local images
     remotePatterns: [
       {
