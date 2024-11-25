@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "noImplicitAny": false,
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -20,6 +21,7 @@
       "@modules/*": ["modules/*"],
       "@assets/*": ["assets/*"],
       "@pages/*": ["pages/*"],
+      "@/*": ["./src/*"]
     },
     "plugins": [
       {

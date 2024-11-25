@@ -21,6 +21,15 @@ module.exports = {
         padding: "padding-top padding-right padding-bottom padding-left",
       },
       colors: {
+
+        def:{
+          0: "#F6F3EA",
+          5: "#D7BF8C",
+          10: "#7ba7ce",
+          20: "#D9D9D9",
+          30: "#FCEFD3"
+        },
+
         grey: {
           0: "#FFFFFF",
           5: "#F9FAFB",
@@ -33,6 +42,10 @@ module.exports = {
           70: "#374151",
           80: "#1F2937",
           90: "#111827",
+        },
+        fuchsia: {
+          0: "#e879f9",
+          10: "#a855f7",
         },
       },
       borderRadius: {
@@ -71,6 +84,10 @@ module.exports = {
         ],
       },
       keyframes: {
+        'grid-scroll': {
+          '0%': { transform: 'rotateX(45deg) translateY(0)' },
+          '100%': { transform: 'rotateX(45deg) translateY(50%)' }
+        },
         ring: {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
@@ -141,7 +158,11 @@ module.exports = {
           "100%": { transform: "translateY(0)" },
         },
       },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
       animation: {
+        'grid-scroll': 'grid-scroll 20s linear infinite',
         ring: "ring 2.2s cubic-bezier(0.5, 0, 0.5, 1) infinite",
         "fade-in-right":
           "fade-in-right 0.3s cubic-bezier(0.5, 0, 0.5, 1) forwards",

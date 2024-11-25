@@ -6,6 +6,7 @@ import { Text } from "@medusajs/ui"
 import Thumbnail from "../thumbnail"
 import { getProductPrice } from "@lib/util/get-product-price"
 import { retrievePricedProductById } from "@lib/data"
+import ButtonProduct from "../button-product"
 
 export default async function ProductPreview({
   productPreview,
@@ -33,19 +34,19 @@ export default async function ProductPreview({
   return (
     <LocalizedClientLink
       href={`/products/${productPreview.handle}`}
-      className="group"
+      className="group bg-transparent"
     >
-      <div data-testid="product-wrapper">
+      <div data-testid="product-wrapper" className="bg-transparent">
         <Thumbnail
           thumbnail={productPreview.thumbnail}
           size="full"
           isFeatured={isFeatured}
+          className="bg-transparent"
         />
-        <div className="flex txt-compact-medium mt-4 justify-between">
-          <Text className="text-md" data-testid="product-title">{productPreview.title}</Text>
-          <div className="flex items-center gap-x-2">
-            {cheapestPrice && <PreviewPrice price={cheapestPrice} />}
-          </div>
+        <div className="flex flex-col text-fuchsia-700 items-center mt-3">
+          <div className="mb-3">{productPreview.title}</div>
+          <div className="text-black">{cheapestPrice && <PreviewPrice price={cheapestPrice} />}</div>
+          <ButtonProduct></ButtonProduct>
         </div>
       </div>
     </LocalizedClientLink>

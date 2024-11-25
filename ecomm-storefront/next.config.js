@@ -7,7 +7,12 @@ const store = require("./store.config.json")
 const nextConfig = withStoreConfig({
   features: store.features,
   reactStrictMode: true,
+  staticPageGenerationTimeout: 60,
   images: {
+    domains: [
+      "localhost",
+      "api.carlsrl.it"
+    ],
     unoptimized: true, // This is for local images
     remotePatterns: [
       {

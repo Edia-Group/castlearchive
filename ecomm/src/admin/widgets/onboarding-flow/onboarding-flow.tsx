@@ -273,7 +273,7 @@ const OnboardingFlow = (props: OnboardingWidgetProps) => {
     if (location.pathname.startsWith("/a/products/prod_") && isProductCreateStep && "product" in props) {
       // change to the preview product step
       const currentStepIndex = findStepIndex(currentStep)
-      steps[currentStepIndex].onNext?.(props.product)
+      steps[currentStepIndex]?.onNext?.(props.product)
     }
   }, [location.pathname, isProductCreateStep])
 
@@ -283,7 +283,7 @@ const OnboardingFlow = (props: OnboardingWidgetProps) => {
     if (location.pathname.startsWith("/a/orders/order_") && isOrderCreateStep && "order" in props) {
       // change to the preview product step
       const currentStepIndex = findStepIndex(currentStep)
-      steps[currentStepIndex].onNext?.(props.order)
+      steps[currentStepIndex]?.onNext?.(props.order)
     }
   }, [location.pathname, isOrderCreateStep])
 
@@ -305,7 +305,7 @@ const OnboardingFlow = (props: OnboardingWidgetProps) => {
       // retrieve necessary data and trigger the next function
       getOnboardingParamStepData(onboardingStep)
       .then((data) => {
-        steps[openStepIndex].onNext?.(data)
+        steps[openStepIndex]?.onNext?.(data)
       })
       .catch((e) => console.error(e))
     }

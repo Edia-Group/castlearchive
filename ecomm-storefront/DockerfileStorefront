@@ -1,0 +1,16 @@
+FROM node:18-alpine
+
+WORKDIR /ecomm-storefront
+
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
+
+COPY . .
+
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+
+RUN yarn build
+
+EXPOSE 8000
+
+CMD ["yarn", "start"]
