@@ -10,10 +10,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-mode="light" className="bg-transparent" suppressHydrationWarning>
+    <html lang="en" data-mode="light" className="bg-def-0" suppressHydrationWarning>
       <body className="bg-transparent">
-        <SynthwaveGrid />
-        <main className="relative bg-transparent">{props.children}</main>
+        <main className="relative ">{props.children}</main>
       </body>
     </html>
   )

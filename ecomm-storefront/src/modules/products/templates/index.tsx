@@ -1,7 +1,8 @@
 import { Region } from "@medusajs/medusa"
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import React, { Suspense } from "react"
-
+import { Heading, Text } from "@medusajs/ui"
+import ProductPrice from "../components/product-price"
 import ImageGallery from "@modules/products/components/image-gallery"
 import ProductActions from "@modules/products/components/product-actions"
 import ProductOnboardingCta from "@modules/products/components/product-onboarding-cta"
@@ -11,7 +12,8 @@ import ProductInfo from "@modules/products/templates/product-info"
 import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products"
 import { notFound } from "next/navigation"
 import ProductActionsWrapper from "./product-actions-wrapper"
-
+import ProductSize from "../components/product-size"
+import ButtonProduct from "../components/button-product"
 type ProductTemplateProps = {
   product: PricedProduct
   region: Region
@@ -30,31 +32,39 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   return (
     <>
       <div
-        className="content-container flex flex-col small:flex-row small:items-start py-6 relative"
+        className="content-container flex flex-col small:flex-row small:items-start py-6 relative bg-transparent"
         data-testid="product-container"
       >
-        <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-6">
-          <ProductInfo product={product} />
-          <ProductTabs product={product} />
+        <div className="flex flex-col size-full bg-transparent mr-7">
+        <ImageGallery images={product?.images || []} />
+        <Heading level="h2" className="text-3xl leading-10 text-white text-center" data-testid="product-title">
+          {product.title}
+        </Heading>        <Heading level="h2" className="text-3xl leading-10 text-white text-center" data-testid="product-title">
+        <ProductPrice product={product} region={region} />
+        </Heading>
         </div>
-        <div className="block w-full relative">
-          <ImageGallery images={product?.images || []} />
+        <div className="flex flex-col size-full bg-transparent ml-18">
+        <div className="flex flex-col text-black">
+        <div>
+        <ProductSize></ProductSize>
+        <div className="size-full">
+        <button
+      className="bg-fuchsia-10 text-white font-bold px-4 py-2 border-4 border-fuchsia-900
+                 hover:bg-fuchsia-700 active:border-fuchsia-900 transition duration-150 
+                 rounded-lg pixelated size-full"
+    >
+      ADD TO CART
+    </button>
         </div>
-        <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-12">
-          <ProductOnboardingCta />
-          <Suspense
-            fallback={
-              <ProductActions
-                disabled={true}
-                product={product}
-                region={region}
-              />
-            }
-          >
-            <ProductActionsWrapper id={product.id} region={region} />
-          </Suspense>
         </div>
+        
+        </div>
+        <div className="mt-6">
+        <ProductTabs product={product} />
+        </div>
+        </div>        
       </div>
+      
       <div
         className="content-container my-16 small:my-32"
         data-testid="related-products-container"
