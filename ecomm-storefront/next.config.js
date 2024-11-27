@@ -31,6 +31,14 @@ const nextConfig = withStoreConfig({
         protocol: "https",
         hostname: "medusa-server-testing.s3.us-east-1.amazonaws.com",
       },
+      {
+        protocol: "https",
+        hostname:"ferracciobucket-test.s3.eu-north-1.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname:"ferracciobucket.s3.eu-north-1.amazonaws.com",
+      },
     ],
   },
 })
