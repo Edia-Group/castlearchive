@@ -27,7 +27,9 @@ module.exports = {
           5: "#D7BF8C",
           10: "#7ba7ce",
           20: "#D9D9D9",
-          30: "#FCEFD3"
+          30: "#FCEFD3",
+          50: "#7BA7CE",
+          60: "#691C73"
         },
 
         grey: {
