@@ -1,15 +1,27 @@
-FROM node:18-alpine
+# Stage 1: Build the application
+FROM node:20-alpine AS builder
 
 WORKDIR /ecomm-storefront
 
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
+# Set environment variable to mock or skip data fetching
+ENV DOCKER_BUILD=true
+
 COPY . .
 
-ENV NODE_OPTIONS="--max-old-space-size=4096"
-
 RUN yarn build
+
+# Stage 2: Prepare runtime environment
+FROM node:20-alpine AS runner
+
+WORKDIR /ecomm
+
+COPY --from=builder /ecomm-storefront/package.json .
+COPY --from=builder /ecomm-storefront/yarn.lock .
+COPY --from=builder /ecomm-storefront/next.config.js ./
+COPY --from=builder /ecomm-storefront/.next ./.next
 
 EXPOSE 8000
 
