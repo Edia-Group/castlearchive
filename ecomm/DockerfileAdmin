@@ -1,25 +1,9 @@
-FROM node:20-alpine AS builder
-
+FROM node:18-alpine
 WORKDIR /ecomm
-
 COPY package.json yarn.lock ./
-
 RUN yarn install --frozen-lockfile
-
 COPY . .
-
 RUN yarn build:admin:prod
-
-FROM node:20-alpine AS runner
-
-WORKDIR /ecomm
-
-COPY --from=builder /ecomm/package.json .
-COPY --from=builder /ecomm/yarn.lock .
-COPY --from=builder /ecomm/node_modules ./node_modules
-
 EXPOSE 7001
-
 RUN yarn global add serve
-
 CMD ["yarn", "serve:admin:prod"]
