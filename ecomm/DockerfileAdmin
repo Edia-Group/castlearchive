@@ -1,13 +1,21 @@
-
+# Stage 1: Build the application
 FROM node:20-alpine AS builder
 
 WORKDIR /ecomm
 
-COPY package.json yarn.lock ./
+# Install Python (required for some Medusa dependencies)
+RUN apk add --no-cache python3
 
+# Copy dependency files and install dependencies
+COPY package.json yarn.lock ./
+RUN yarn global add @medusajs/medusa-cli
 RUN yarn install --frozen-lockfile
 
+# Copy the rest of the application code
 COPY . .
+
+# Build the Medusa API
+RUN yarn build:admin:prod
 
 FROM node:20-alpine AS runner
 
@@ -16,6 +24,7 @@ WORKDIR /ecomm
 COPY --from=builder /ecomm/package.json .
 COPY --from=builder /ecomm/yarn.lock .
 COPY --from=builder /ecomm/node_modules ./node_modules
+COPY --from=builder /ecomm/.env .
 
 EXPOSE 7001
 
