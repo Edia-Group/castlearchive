@@ -17,14 +17,22 @@ COPY . .
 # Build the Medusa API
 RUN yarn build:admin:prod
 
+# Stage 2: Runtime setup
 FROM node:20-alpine AS runner
 
 WORKDIR /ecomm
 
+# Copy necessary files from builder
 COPY --from=builder /ecomm/package.json .
 COPY --from=builder /ecomm/yarn.lock .
 COPY --from=builder /ecomm/node_modules ./node_modules
 COPY --from=builder /ecomm/.env .
+
+# Copy built files (if dist doesn't exist, handle it gracefully)
+COPY --from=builder /ecomm/dist ./dist
+
+# Copy the configuration file
+COPY --from=builder /ecomm/medusa-config.js .
 
 EXPOSE 7001
 
