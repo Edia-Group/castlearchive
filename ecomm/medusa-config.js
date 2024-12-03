@@ -38,9 +38,13 @@ const basePlugins = [
     resolve: `medusa-plugin-sendgrid`,
     options: {
       api_key: process.env.SENDGRID_API_KEY,
-      from: "giannnlaa@gmail.com",
-      order_placed_template: "d-e69e46b356e7493c8dd7d0b692828f38",
+      from: process.env.SENDGRID_FROM,
+      order_placed_template: 
+        process.env.SENDGRID_ORDER_PLACED_ID,
+      user_register_template:
+        process.env.SENDGRID_USER_REGISTRATION_ID
     },
+    
   }
 ];
 
@@ -159,5 +163,9 @@ module.exports = {
   admin: {
     path: "/",
     serve: !process.env.DISABLE_MEDUSA_ADMIN || process.env.DISABLE_MEDUSA_ADMIN === "false"
-  }
+  },
+  eventBus: {
+    resolve: "@medusajs/event-bus-local",
+  },
+
 };
