@@ -14,7 +14,6 @@ RUN yarn install --frozen-lockfile
 # Copy the rest of the application code
 COPY . .
 
-# Build the Medusa API
 RUN yarn build:admin:prod
 
 # Stage 2: Runtime setup
@@ -29,7 +28,7 @@ COPY --from=builder /ecomm/node_modules ./node_modules
 COPY --from=builder /ecomm/.env .
 
 # Copy built files (if dist doesn't exist, handle it gracefully)
-COPY --from=builder /ecomm/dist ./dist
+COPY --from=builder /ecomm/build ./build
 
 # Copy the configuration file
 COPY --from=builder /ecomm/medusa-config.js .
