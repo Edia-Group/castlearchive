@@ -1,6 +1,4 @@
-
-
-FROM node:18-alpine
+FROM node:20-alpine AS builder
 
 WORKDIR /ecomm-storefront
 
@@ -9,9 +7,18 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
-ENV NODE_OPTIONS="--max-old-space-size=4096"
-
 RUN yarn build
+
+FROM node:20-alpine AS runner
+
+WORKDIR /ecomm-storefront
+
+# Copy necessary files from builder
+COPY --from=builder /ecomm-storefront/package.json .
+COPY --from=builder /ecomm-storefront/yarn.lock .
+COPY --from=builder /ecomm-storefront/node_modules ./node_modules
+COPY --from=builder /ecomm-storefront/.env .
+COPY --from=builder /ecomm-storefront/.next ./.next
 
 EXPOSE 8000
 
