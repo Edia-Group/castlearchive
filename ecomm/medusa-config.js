@@ -38,9 +38,9 @@ const basePlugins = [
     resolve: `medusa-plugin-sendgrid`,
     options: {
       api_key: process.env.SENDGRID_API_KEY,
-      from: "giovanni.sdringola51@gmail.com",
-      order_placed_template: "d-e69e46b356e7493c8dd7d0b692828f38",
-      customer_created_template: "d-f71457c3457245609440a731730ced26"
+      from: process.env.SENDGRID_FROM,
+      order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID,
+      customer_created_template: process.env.SENDGRID_CUSTOMER_CREATED_ID
     },
   }
 ];
