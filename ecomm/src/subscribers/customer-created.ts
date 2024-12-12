@@ -9,13 +9,15 @@ import { eventNames } from "process"
     data, eventName, container, pluginOptions, 
   }: SubscriberArgs<Record<string, string>>) {
     const sendGridService = container.resolve("sendgridService")
-  
+    //const customerService: CustomerService = container.resolve( "productService" )
+    
+    console.log("CustomerService.Events.CREATED",CustomerService.Events.CREATED)
+    
     sendGridService.sendEmail({
-      templateId: "d-f71457c3457245609440a731730ced26",
-      from: "giovanni.sdringola51@gmail.com",
+      templateId: process.env.SENDGRID_USER_REGISTRATION_ID,
+      from: process.env.SENDGRID_FROM,
       to: data.email,
       dynamic_template_data: {
-        // any data necessary for your template...
         first_name: data.first_name,
         last_name: data.last_name,
       },
@@ -24,8 +26,4 @@ import { eventNames } from "process"
   
   export const config: SubscriberConfig = {
     event: "customer.created",
-    //event: CustomerService.Events.CREATED,
-    context: {
-      subscriberId: "customer-created-handler",
-    },
   }
