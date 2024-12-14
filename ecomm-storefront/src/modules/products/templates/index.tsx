@@ -1,19 +1,18 @@
-import { Region } from "@medusajs/medusa"
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
-import React, { Suspense } from "react"
 import { Heading, Text } from "@medusajs/ui"
-import ProductPrice from "../components/product-price"
+import React, { Suspense } from "react"
+
 import ImageGallery from "@modules/products/components/image-gallery"
+import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import ProductActions from "@modules/products/components/product-actions"
+import ProductActionsWrapper from "./product-actions-wrapper"
+import ProductInfo from "@modules/products/templates/product-info"
 import ProductOnboardingCta from "@modules/products/components/product-onboarding-cta"
 import ProductTabs from "@modules/products/components/product-tabs"
+import { Region } from "@medusajs/medusa"
 import RelatedProducts from "@modules/products/components/related-products"
-import ProductInfo from "@modules/products/templates/product-info"
 import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products"
 import { notFound } from "next/navigation"
-import ProductActionsWrapper from "./product-actions-wrapper"
-import ProductSize from "../components/product-size"
-import ButtonProduct from "../components/button-product"
+
 type ProductTemplateProps = {
   product: PricedProduct
   region: Region
@@ -31,42 +30,63 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
   return (
     <>
-      <div
-        className="content-container flex flex-col small:flex-row small:items-start py-6 relative bg-transparent"
+<div 
+        className="content-container flex flex-col lg:flex-row lg:items-start relative"
         data-testid="product-container"
       >
-        <div className="flex flex-col size-full bg-transparent mr-7">
-        <ImageGallery images={product?.images || []} />
-        <Heading level="h2" className="text-3xl leading-10 text-white text-center" data-testid="product-title">
-          {product.title}
-        </Heading>        <Heading level="h2" className="text-3xl leading-10 text-white text-center" data-testid="product-title">
-        <ProductPrice product={product} region={region} />
-        </Heading>
-        </div>
-        <div className="flex flex-col size-full bg-transparent ml-18">
-        <div className="flex flex-col text-black">
-        <div>
-        <ProductSize></ProductSize>
-        <div className="size-full">
-        <button
-      className="bg-fuchsia-10 text-white font-bold px-4 py-2 border-4 border-fuchsia-900
-                 hover:bg-fuchsia-700 active:border-fuchsia-900 transition duration-150 
-                 rounded-lg pixelated size-full"
-    >
-      ADD TO CART
-    </button>
-        </div>
+        {/* Product Image and Info Section */}
+        <div className="w-full lg:w-1/2 relative">
+          <div className="sticky top-0 lg:top-24">
+            {/* Image Gallery wrapper with responsive padding */}
+            <div className="md:px-12 lg:px-16 xl:px-32 py-4 lg:py-8">
+              <ImageGallery images={product?.images || []} />
+            </div>
+            <div className="hidden lg:block mt-8 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-32">
+              <Heading 
+                level="h2" 
+                className="text-3xl leading-10 text-black text-center" 
+                data-testid="product-title"
+              >
+                {product.title}
+              </Heading>
+            </div>
+          </div>
         </div>
         
+        {/* Product Actions and Details Section */}
+        <div className="w-full lg:w-1/2">
+          {/* Mobile Product Info */}
+          <div className="block lg:hidden mb-6 px-4 sm:px-8">
+            <ProductInfo product={product} />
+          </div>
+          
+          <div className="sticky top-0 lg:top-24 space-y-8 px-4 sm:px-8 md:px-12 lg:px-16">
+            <ProductOnboardingCta />
+            <Suspense
+              fallback={
+                <ProductActions
+                  disabled={true}
+                  product={product}
+                  region={region}
+                />
+              }
+            >
+              <ProductActionsWrapper id={product.id} region={region} />
+
+              <Text className="text-medium text-black" data-testid="product-description">
+                {product.description}
+              </Text>
+
+              <ProductTabs product={product} />
+            </Suspense>
+          </div>
         </div>
-        <div className="mt-6">
-        <ProductTabs product={product} />
-        </div>
-        </div>        
       </div>
+
       
+      {/* Related Products Section */}
       <div
-        className="content-container my-16 small:my-32"
+        className="content-container my-8 lg:my-16"
         data-testid="related-products-container"
       >
         <Suspense fallback={<SkeletonRelatedProducts />}>
