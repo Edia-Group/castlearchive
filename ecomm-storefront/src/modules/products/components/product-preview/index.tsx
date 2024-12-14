@@ -43,10 +43,12 @@ export default async function ProductPreview({
           isFeatured={isFeatured}
           className="bg-transparent"
         />
-        <div className="flex flex-col text-fuchsia-700 items-center mt-3">
-          <div className="mb-3">{productPreview.title}</div>
-          <div className="text-black">{cheapestPrice && <PreviewPrice price={cheapestPrice} />}</div>
+        <div className="flex flex-col text-def-60 items-center mt-6">
+          <div className="mb-3 text-4xl">{productPreview.title}</div>
+          <div className="text-black text-2xl text-def-50">{cheapestPrice && <PreviewPrice price={cheapestPrice} />}</div>
+          <div>
           <ButtonProduct></ButtonProduct>
+          </div>
         </div>
       </div>
     </LocalizedClientLink>
