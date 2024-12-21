@@ -35,21 +35,32 @@ export default async function ProductPreview({
       href={`/products/${productPreview.handle}`}
       className="group bg-transparent"
     >
-      <div data-testid="product-wrapper" className="bg-transparent">
-        <Thumbnail
-          thumbnail={productPreview.thumbnail}
-          size="full"
-          isFeatured={isFeatured}
-          className="bg-transparent"
-        />
-        <div className="flex flex-col text-[#691C73] items-center mt-6">
-          <div className="mb-3 text-4xl">{productPreview.title}</div>
-          <div className="text-[#7BA7CE] text-2xl">
+      <div 
+        data-testid="product-wrapper" 
+        className="flex flex-col items-center p-3 sm:p-4"
+      >
+        <div className="w-full aspect-square mb-4">
+          <Thumbnail
+            thumbnail={productPreview.thumbnail}
+            size="full"
+            isFeatured={isFeatured}
+            className="w-full h-full object-cover"
+          />
+        </div>
+        
+        <div className="flex flex-col items-center w-full space-y-2">
+          <h3 className="text-lg sm:text-xl lg:text-2xl text-[#691C73] text-center line-clamp-2">
+            {productPreview.title}
+          </h3>
+          
+          <div className="text-base sm:text-lg lg:text-xl text-[#7BA7CE]">
             {cheapestPrice && <PreviewPrice price={cheapestPrice} />}
           </div>
-          <div className="mt-2">
+          
+          <div className="flex justify-center w-full mt-2">
             <ButtonProduct 
               buttonText="ADD TO CART"
+              textClassName="text-lg"
               aria-label={`Add ${productPreview.title} to cart`}
             />
           </div>

@@ -13,24 +13,32 @@ const pixelFont = Press_Start_2P({
 
 interface ButtonProductProps extends ComponentProps<typeof Button> {
   buttonText?: string
+  textClassName?: string
 }
 
 const ButtonProduct = forwardRef<HTMLButtonElement, ButtonProductProps>(
-  ({ buttonText, children, className = "", isLoading, disabled, ...props }, ref) => {
+  ({ buttonText, children, className = "", textClassName = "", isLoading, disabled, ...props }, ref) => {
     return (
       <Button
         ref={ref}
         className={`
           relative 
           min-h-[55px]
-          w-[259px]
+          w-[259px] 
+          md:w-full
+          md:max-w-lg
           p-0
           disabled:opacity-50
-          bg-transparent
+          !bg-transparent
           border-0
           outline-0
           ring-0
-          shadow-none
+          !shadow-none
+          after:hidden
+          before:hidden
+          [&>*]:bg-transparent
+          [&>*]:border-0
+          [&>*]:shadow-none
           hover:bg-transparent
           hover:border-0
           hover:outline-0
@@ -53,7 +61,7 @@ const ButtonProduct = forwardRef<HTMLButtonElement, ButtonProductProps>(
       >
         {/* Background frame */}
         <div 
-          className="absolute inset-0 bg-center bg-no-repeat bg-cover select-none pointer-events-none" 
+          className="absolute inset-0 bg-center bg-no-repeat bg-contain select-none pointer-events-none" 
           style={{
             backgroundImage: `url(${image12.src})`,
             imageRendering: 'pixelated'
@@ -79,11 +87,11 @@ const ButtonProduct = forwardRef<HTMLButtonElement, ButtonProductProps>(
         `}>
           <span className={`
             ${pixelFont.className} 
-            text-lg 
             uppercase 
             text-black
             px-4
             select-none
+            ${textClassName}
           `}>
             {buttonText || children}
           </span>
@@ -94,5 +102,4 @@ const ButtonProduct = forwardRef<HTMLButtonElement, ButtonProductProps>(
 )
 
 ButtonProduct.displayName = "ButtonProduct"
-
 export default ButtonProduct
