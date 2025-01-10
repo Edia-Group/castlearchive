@@ -18,7 +18,7 @@ export default function ProductRail({
   }
 
   return (
-    <div className="content-container py-6 small:py-24">
+    <div className="content-container pb-6 pl-6 pr-6">
       <div className="flex justify-between mb-8">
         {/*
         <Text className="txt-xlarge">{collection.title}</Text>
@@ -27,7 +27,7 @@ export default function ProductRail({
         </InteractiveLink>
         */}
       </div>
-      <ul className="grid grid-cols-2 small:grid-cols-4 gap-x-6 gap-y-24 small:gap-y-36 m-7">
+      <ul className="grid grid-cols-1 gap-x-48 gap-y-24 m-7 small:grid-cols-2 small:gap-y-36">
         {products &&
           products.map((product) => (
             <li key={product.id}>

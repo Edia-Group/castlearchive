@@ -164,6 +164,7 @@ export default function ProductActions({
           disabled={!inStock || !variant || !!disabled || isAdding}
           variant="primary"
           className="size-full mt-2"
+          textClassName="text-md"
           isLoading={isAdding}
           data-testid="add-product-button"
         >
