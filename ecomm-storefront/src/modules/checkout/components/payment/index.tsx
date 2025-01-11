@@ -1,21 +1,21 @@
 "use client"
 
+import { Button, Container, Heading, Text, Tooltip, clx } from "@medusajs/ui"
+import { CheckCircleSolid, CreditCard } from "@medusajs/icons"
 import { useCallback, useContext, useEffect, useMemo, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { RadioGroup } from "@headlessui/react"
-import ErrorMessage from "@modules/checkout/components/error-message"
-import { Cart } from "@medusajs/medusa"
-import { CheckCircleSolid, CreditCard } from "@medusajs/icons"
-import { Button, Container, Heading, Text, Tooltip, clx } from "@medusajs/ui"
-import { CardElement } from "@stripe/react-stripe-js"
-import { StripeCardElementOptions } from "@stripe/stripe-js"
 
+import { CardElement } from "@stripe/react-stripe-js"
+import { Cart } from "@medusajs/medusa"
 import Divider from "@modules/common/components/divider"
-import Spinner from "@modules/common/icons/spinner"
+import ErrorMessage from "@modules/checkout/components/error-message"
 import PaymentContainer from "@modules/checkout/components/payment-container"
-import { setPaymentMethod } from "@modules/checkout/actions"
-import { paymentInfoMap } from "@lib/constants"
+import { RadioGroup } from "@headlessui/react"
+import Spinner from "@modules/common/icons/spinner"
+import { StripeCardElementOptions } from "@stripe/stripe-js"
 import { StripeContext } from "@modules/checkout/components/payment-wrapper"
+import { paymentInfoMap } from "@lib/constants"
+import { setPaymentMethod } from "@modules/checkout/actions"
 
 const Payment = ({
   cart,
@@ -104,7 +104,7 @@ const Payment = ({
   }, [isOpen])
 
   return (
-    <div className="bg-white">
+    <div className="bg-def-0">
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"

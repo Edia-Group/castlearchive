@@ -1,9 +1,9 @@
 import { Dialog, Transition } from "@headlessui/react"
-import { clx } from "@medusajs/ui"
+import { ModalProvider, useModal } from "@lib/context/modal-context"
 import React, { Fragment } from "react"
 
-import { ModalProvider, useModal } from "@lib/context/modal-context"
 import X from "@modules/common/icons/x"
+import { clx } from "@medusajs/ui"
 
 type ModalProps = {
   isOpen: boolean
@@ -65,7 +65,7 @@ const Modal = ({
                     "max-w-xl": size === "medium",
                     "max-w-3xl": size === "large",
                     "bg-transparent shadow-none": search,
-                    "bg-white shadow-xl border rounded-rounded": !search,
+                    "bg-def-0 shadow-xl border rounded-rounded": !search,
                   }
                 )}
               >

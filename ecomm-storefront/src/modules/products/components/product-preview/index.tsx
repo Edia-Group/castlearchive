@@ -11,10 +11,12 @@ export default async function ProductPreview({
   productPreview,
   isFeatured,
   region,
+  showAddToCartButton
 }: {
   productPreview: ProductPreviewType
   isFeatured?: boolean
   region: Region
+  showAddToCartButton: boolean
 }) {
   const pricedProduct = await retrievePricedProductById({
     id: productPreview.id,
@@ -37,18 +39,17 @@ export default async function ProductPreview({
     >
       <div 
         data-testid="product-wrapper" 
-        className="flex flex-col items-center p-3 sm:p-4"
+        className="flex flex-col items-center p-2 sm:p-3" // Reduced padding
       >
-        <div className="w-full aspect-square mb-4">
+        <div className="w-full relative aspect-square mb-2"> {/* Reduced margin-bottom */}
           <Thumbnail
             thumbnail={productPreview.thumbnail}
             size="full"
             isFeatured={isFeatured}
-            className="w-full h-full object-cover"
           />
         </div>
         
-        <div className="flex flex-col items-center w-full space-y-2">
+        <div className="flex flex-col items-center w-full space-y-1"> {/* Reduced space between elements */}
           <h3 className="text-lg sm:text-xl lg:text-2xl text-[#691C73] text-center line-clamp-2">
             {productPreview.title}
           </h3>
@@ -57,12 +58,14 @@ export default async function ProductPreview({
             {cheapestPrice && <PreviewPrice price={cheapestPrice} />}
           </div>
           
-          <div className="flex justify-center w-full mt-2">
-            <ButtonProduct 
-              buttonText="ADD TO CART"
-              textClassName="text-lg"
-              aria-label={`Add ${productPreview.title} to cart`}
-            />
+          <div className="flex justify-center w-full mt-1"> {/* Reduced margin-top */}
+            {showAddToCartButton && (
+              <ButtonProduct
+                buttonText="ADD TO CART"
+                textClassName="text-lg"
+                aria-label={`Add ${productPreview.title} to cart`}
+              />
+            )}
           </div>
         </div>
       </div>

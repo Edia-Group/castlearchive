@@ -1,10 +1,10 @@
-import ItemsTemplate from "./items"
-import Summary from "./summary"
-import EmptyCartMessage from "../components/empty-cart-message"
 import { CartWithCheckoutStep } from "types/global"
-import SignInPrompt from "../components/sign-in-prompt"
-import Divider from "@modules/common/components/divider"
 import { Customer } from "@medusajs/medusa"
+import Divider from "@modules/common/components/divider"
+import EmptyCartMessage from "../components/empty-cart-message"
+import ItemsTemplate from "./items"
+import SignInPrompt from "../components/sign-in-prompt"
+import Summary from "./summary"
 
 const CartTemplate = ({
   cart,
@@ -28,7 +28,7 @@ const CartTemplate = ({
                 <ItemsTemplate region={cart?.region} items={cart?.items} />
               </div>
               <div className="relative">
-                <div className="flex flex-col gap-y-8 sticky top-12">
+                <div className="flex flex-col gap-y-4 sticky top-12">
                   {cart && cart.region && (
                     <>
                       <div className="bg-def py-6">

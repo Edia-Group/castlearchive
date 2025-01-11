@@ -1,9 +1,8 @@
-import { Table } from "@medusajs/ui"
-
-import repeat from "@lib/util/repeat"
 import SkeletonCartItem from "@modules/skeletons/components/skeleton-cart-item"
 import SkeletonCodeForm from "@modules/skeletons/components/skeleton-code-form"
 import SkeletonOrderSummary from "@modules/skeletons/components/skeleton-order-summary"
+import { Table } from "@medusajs/ui"
+import repeat from "@lib/util/repeat"
 
 const SkeletonCartPage = () => {
   return (
@@ -52,7 +51,7 @@ const SkeletonCartPage = () => {
               </Table>
             </div>
           </div>
-          <div className="flex flex-col gap-y-8">
+          <div className="flex flex-col gap-y-4">
             <SkeletonOrderSummary />
             <SkeletonCodeForm />
           </div>
