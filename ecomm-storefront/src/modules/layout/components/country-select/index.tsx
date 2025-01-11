@@ -1,13 +1,13 @@
 "use client"
 
-import { Listbox, Transition } from "@headlessui/react"
-import { Region } from "@medusajs/medusa"
 import { Fragment, useEffect, useMemo, useState } from "react"
-import ReactCountryFlag from "react-country-flag"
+import { Listbox, Transition } from "@headlessui/react"
+import { useParams, usePathname } from "next/navigation"
 
+import ReactCountryFlag from "react-country-flag"
+import { Region } from "@medusajs/medusa"
 import { StateType } from "@lib/hooks/use-toggle-state"
 import { updateRegion } from "app/actions"
-import { useParams, usePathname } from "next/navigation"
 
 type CountryOption = {
   country: string
@@ -91,7 +91,7 @@ const CountrySelect = ({ toggleState, regions }: CountrySelectProps) => {
             leaveTo="opacity-0"
           >
             <Listbox.Options
-              className="absolute -bottom-[calc(100%-36px)] left-0 xsmall:left-auto xsmall:right-0 max-h-[442px] overflow-y-scroll z-[900] bg-white drop-shadow-md text-small-regular uppercase text-black no-scrollbar rounded-rounded w-full"
+              className="absolute -bottom-[calc(100%-36px)] left-0 xsmall:left-auto xsmall:right-0 max-h-[442px] overflow-y-scroll z-[900] bg-def-0 drop-shadow-md text-small-regular uppercase text-black no-scrollbar rounded-rounded w-full"
               static
             >
               {options?.map((o, index) => {

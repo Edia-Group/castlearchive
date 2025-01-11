@@ -1,19 +1,19 @@
 "use client"
 
-import { RadioGroup } from "@headlessui/react"
-import { CheckCircleSolid } from "@medusajs/icons"
-import { Cart } from "@medusajs/medusa"
-import { PricedShippingOption } from "@medusajs/medusa/dist/types/pricing"
 import { Button, Heading, Text, clx, useToggleState } from "@medusajs/ui"
-import { formatAmount } from "@lib/util/prices"
-
-import Divider from "@modules/common/components/divider"
-import Radio from "@modules/common/components/radio"
-import Spinner from "@modules/common/icons/spinner"
-import ErrorMessage from "@modules/checkout/components/error-message"
-import { setShippingMethod } from "@modules/checkout/actions"
-import { useRouter, useSearchParams, usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+
+import { Cart } from "@medusajs/medusa"
+import { CheckCircleSolid } from "@medusajs/icons"
+import Divider from "@modules/common/components/divider"
+import ErrorMessage from "@modules/checkout/components/error-message"
+import { PricedShippingOption } from "@medusajs/medusa/dist/types/pricing"
+import Radio from "@modules/common/components/radio"
+import { RadioGroup } from "@headlessui/react"
+import Spinner from "@modules/common/icons/spinner"
+import { formatAmount } from "@lib/util/prices"
+import { setShippingMethod } from "@modules/checkout/actions"
 
 type ShippingProps = {
   cart: Omit<Cart, "refundable_amount" | "refunded_total">
@@ -64,7 +64,7 @@ const Shipping: React.FC<ShippingProps> = ({
   }, [isOpen])
 
   return (
-    <div className="bg-white">
+    <div className="bg-def-0">
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"

@@ -184,7 +184,7 @@ export default function ProductActions({
           inStock={inStock}
           handleAddToCart={handleAddToCart}
           isAdding={isAdding}
-          show={!inView}
+          show={false}
           optionsDisabled={!!disabled || isAdding}
         />
       </div>

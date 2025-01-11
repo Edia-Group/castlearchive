@@ -1,15 +1,14 @@
 "use client"
 
-import { Order } from "@medusajs/medusa"
-import { XMark } from "@medusajs/icons"
-import React from "react"
-
 import Help from "@modules/order/components/help"
 import Items from "@modules/order/components/items"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { Order } from "@medusajs/medusa"
 import OrderDetails from "@modules/order/components/order-details"
 import OrderSummary from "@modules/order/components/order-summary"
+import React from "react"
 import ShippingDetails from "@modules/order/components/shipping-details"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { XMark } from "@medusajs/icons"
 
 type OrderDetailsTemplateProps = {
   order: Order
@@ -31,7 +30,7 @@ const OrderDetailsTemplate: React.FC<OrderDetailsTemplateProps> = ({
         </LocalizedClientLink>
       </div>
       <div
-        className="flex flex-col gap-4 h-full bg-white w-full"
+        className="flex flex-col gap-4 h-full bg-def-0 w-full"
         data-testid="order-details-container"
       >
         <OrderDetails order={order} showStatus />
