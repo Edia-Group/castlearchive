@@ -25,11 +25,11 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   region,
   countryCode,
 }) => {
-  if (!product || !product.id) {
-    return notFound()
-  }
-
   const price = useMemo(() => {
+    if (!product || !product.id) {
+      return null
+    }
+
     const productPrice = getProductPrice({
       product: product,
       region,
@@ -42,6 +42,10 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
     const { variantPrice, cheapestPrice } = productPrice
     return variantPrice || cheapestPrice || null
   }, [product, region])
+
+  if (!product || !product.id) {
+    return notFound()
+  }
 
   return (
     <>
