@@ -1,16 +1,17 @@
 "use client"
 
-import { Popover, Transition } from "@headlessui/react"
-import { Cart } from "@medusajs/medusa"
-import { Button } from "@medusajs/ui"
-import { useParams, usePathname } from "next/navigation"
 import { Fragment, useEffect, useRef, useState } from "react"
-import { formatAmount } from "@lib/util/prices"
+import { Popover, Transition } from "@headlessui/react"
+import { useParams, usePathname } from "next/navigation"
+
+import { Button } from "@medusajs/ui"
+import { Cart } from "@medusajs/medusa"
 import DeleteButton from "@modules/common/components/delete-button"
 import LineItemOptions from "@modules/common/components/line-item-options"
 import LineItemPrice from "@modules/common/components/line-item-price"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Thumbnail from "@modules/products/components/thumbnail"
+import { formatAmount } from "@lib/util/prices"
 
 const CartDropdown = ({
   cart: cartState,
@@ -101,7 +102,7 @@ const CartDropdown = ({
         >
           <Popover.Panel
             static
-            className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-white border-x border-b border-gray-200 w-[420px] text-ui-fg-base"
+            className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-def-0 border border-black w-[420px] text-ui-fg-base"
             data-testid="nav-cart-dropdown"
           >
             <div className="p-4 flex items-center justify-center">
@@ -109,7 +110,7 @@ const CartDropdown = ({
             </div>
             {cartState && cartState.items?.length ? (
               <>
-                <div className="overflow-y-scroll max-h-[402px] px-4 grid grid-cols-1 gap-y-8 no-scrollbar p-px">
+                <div className="overflow-y-scroll max-h-[402px] px-4 grid grid-cols-1 gap-y-4 no-scrollbar p-px">
                   {cartState.items
                     .sort((a, b) => {
                       return a.created_at > b.created_at ? -1 : 1

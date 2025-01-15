@@ -1,7 +1,6 @@
 import { ProductOption } from "@medusajs/medusa"
-import { clx } from "@medusajs/ui"
 import React from "react"
-
+import { clx } from "@medusajs/ui"
 import { onlyUnique } from "@lib/util/only-unique"
 
 type OptionSelectProps = {
@@ -11,6 +10,7 @@ type OptionSelectProps = {
   title: string
   disabled: boolean
   "data-testid"?: string
+  isAdding?: boolean
 }
 
 const OptionSelect: React.FC<OptionSelectProps> = ({
@@ -20,14 +20,14 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
   title,
   "data-testid": dataTestId,
   disabled,
+  isAdding,
 }) => {
   const filteredOptions = option.values.map((v) => v.value).filter(onlyUnique)
 
   return (
-    <div className="flex flex-col gap-y-3">
-      <span className="text-sm">Select {title}</span>
-      <div
-        className="flex flex-wrap justify-between gap-2"
+    <div className="flex flex-col gap-y-4">
+      <div 
+        className="flex gap-2"
         data-testid={dataTestId}
       >
         {filteredOptions.map((v) => {
@@ -36,11 +36,12 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
               onClick={() => updateOption({ [option.id]: v })}
               key={v}
               className={clx(
-                "border-ui-border-base bg-ui-bg-subtle border text-small-regular h-10 rounded-rounded p-2 flex-1 ",
+                "w-12 h-12 rounded-lg flex items-center justify-center text-base font-medium",
+                "bg-[#f3e6d4] border-2 border-[#e6d5bd] shadow-sm",
                 {
-                  "border-ui-border-interactive": v === current,
-                  "hover:shadow-elevation-card-rest transition-shadow ease-in-out duration-150":
-                    v !== current,
+                  "border-[#9f8e73] bg-[#edddc5]": v === current,
+                  "hover:bg-[#edddc5] transition-colors duration-150": !disabled && v !== current,
+                  "opacity-50 cursor-not-allowed": disabled
                 }
               )}
               disabled={disabled}

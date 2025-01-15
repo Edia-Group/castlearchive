@@ -1,10 +1,11 @@
 "use client"
 
-import { formatAmount } from "@lib/util/prices"
-import { InformationCircleSolid } from "@medusajs/icons"
 import { Cart, Order } from "@medusajs/medusa"
-import { Tooltip } from "@medusajs/ui"
+
+import { InformationCircleSolid } from "@medusajs/icons"
 import React from "react"
+import { Tooltip } from "@medusajs/ui"
+import { formatAmount } from "@lib/util/prices"
 
 type CartTotalsProps = {
   data: Omit<Cart, "refundable_amount" | "refunded_total"> | Order
@@ -30,7 +31,7 @@ const CartTotals: React.FC<CartTotalsProps> = ({ data }) => {
 
   return (
     <div>
-      <div className="flex flex-col gap-y-2 txt-medium text-ui-fg-subtle ">
+      <div className="flex flex-col gap-y-2 txt-medium text-ui-fg-subtle bg-def-0">
         <div className="flex items-center justify-between">
           <span className="flex gap-x-1 items-center">
             Subtotal

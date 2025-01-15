@@ -1,12 +1,10 @@
 "use client"
 
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
-
+import Accordion from "./accordion"
 import Back from "@modules/common/icons/back"
 import FastDelivery from "@modules/common/icons/fast-delivery"
+import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import Refresh from "@modules/common/icons/refresh"
-
-import Accordion from "./accordion"
 
 type ProductTabsProps = {
   product: PricedProduct
@@ -87,7 +85,7 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
 const ShippingInfoTab = () => {
   return (
     <div className="text-small-regular py-8">
-      <div className="grid grid-cols-1 gap-y-8">
+      <div className="grid grid-cols-1 gap-y-4">
         <div className="flex items-start gap-x-2">
           <FastDelivery />
           <div>

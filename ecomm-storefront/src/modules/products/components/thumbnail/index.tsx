@@ -1,9 +1,9 @@
-import { Image as MedusaImage } from "@medusajs/medusa"
 import { Container, clx } from "@medusajs/ui"
-import Image from "next/image"
-import React from "react"
 
+import Image from "next/image"
+import { Image as MedusaImage } from "@medusajs/medusa"
 import PlaceholderImage from "@modules/common/icons/placeholder-image"
+import React from "react"
 
 type ThumbnailProps = {
   thumbnail?: string | null
@@ -27,7 +27,8 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
   return (
     <Container
       className={clx(
-        "relative w-full overflow-hidden p-4 bg-transparent shadow-transparent rounded-large transition-shadow ease-in-out duration-150",
+        //"relative w-full overflow-hidden p-4 bg-transparent shadow-transparent rounded-large transition-shadow ease-in-out duration-150",
+        "relative w-full h-full overflow-hidden p-0 bg-transparent shadow-transparent",
         className,
         {
           "aspect-[11/14]": isFeatured,
@@ -41,7 +42,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
       )}
       data-testid={dataTestid}
     >
-      <ImageOrPlaceholder image={initialImage} size={size}/>
+      <ImageOrPlaceholder image={initialImage} size={size} />
     </Container>
   )
 }
@@ -51,20 +52,20 @@ const ImageOrPlaceholder = ({
   size,
 }: Pick<ThumbnailProps, "size"> & { image?: string }) => {
   return image ? (
-    <div className="bg-none">
-    <Image
-      src={image}
-      alt="Thumbnail"
-      className="absolute inset-0 object-cover object-center bg-transparent"
-      draggable={false}
-      quality={50}
-      sizes="(max-width: 576px) 280px, (max-width: 768px) 360px, (max-width: 992px) 480px, 800px"
-      fill
-    />
+    <div className="bg-none relative w-full h-full">
+      <Image
+        src={image}
+        alt="Thumbnail"
+        className="object-contain hover:scale-105 transition-transform duration-200 bg-transparent"
+        draggable={false}
+        quality={100}
+        sizes="(max-width: 576px) 280px, (max-width: 768px) 360px, (max-width: 992px) 480px, 800px"
+        fill
+        priority
+      />
     </div>
-    
   ) : (
-    <div className="w-full h-full absolute inset-0 flex items-center justify-center">
+    <div className="w-full h-full flex items-center justify-center">
       <PlaceholderImage size={size === "small" ? 16 : 24} />
     </div>
   )

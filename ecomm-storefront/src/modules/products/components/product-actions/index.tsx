@@ -1,19 +1,18 @@
 "use client"
 
-import { Region } from "@medusajs/medusa"
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
-import { Button } from "@medusajs/ui"
-import { isEqual } from "lodash"
-import { useParams } from "next/navigation"
 import { useEffect, useMemo, useRef, useState } from "react"
 
-import { useIntersection } from "@lib/hooks/use-in-view"
-import { addToCart } from "@modules/cart/actions"
+import { Button } from "@medusajs/ui"
+import ButtonProduct from "../button-product"
 import Divider from "@modules/common/components/divider"
-import OptionSelect from "@modules/products/components/option-select"
-
 import MobileActions from "../mobile-actions"
-import ProductPrice from "../product-price"
+import OptionSelect from "@modules/products/components/option-select"
+import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
+import { Region } from "@medusajs/medusa"
+import { addToCart } from "@modules/cart/actions"
+import { isEqual } from "lodash"
+import { useIntersection } from "@lib/hooks/use-in-view"
+import { useParams } from "next/navigation"
 
 type ProductActionsProps = {
   product: PricedProduct
@@ -160,20 +159,21 @@ export default function ProductActions({
           )}
         </div>
 
-        <Button
+        <ButtonProduct
           onClick={handleAddToCart}
           disabled={!inStock || !variant || !!disabled || isAdding}
           variant="primary"
-          className="bg-fuchsia-0 hover:bg-fuchsia-10 text-white font-bold py-2 rounded-full size-full mt-2"
+          className="size-full mt-2"
+          textClassName="text-md"
           isLoading={isAdding}
           data-testid="add-product-button"
         >
           {!variant
-            ? "Select variant"
+            ? "SELECT VARIANT"
             : !inStock
-            ? "Out of stock"
-            : "Add to cart"}
-        </Button>
+            ? "OUT OF STOCK"
+            : "ADD TO CART"}
+        </ButtonProduct>
         
         <MobileActions
           product={product}
@@ -184,7 +184,7 @@ export default function ProductActions({
           inStock={inStock}
           handleAddToCart={handleAddToCart}
           isAdding={isAdding}
-          show={!inView}
+          show={false}
           optionsDisabled={!!disabled || isAdding}
         />
       </div>

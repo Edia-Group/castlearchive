@@ -1,15 +1,14 @@
 "use client"
 
-import { Order } from "@medusajs/medusa"
 import { Button } from "@medusajs/ui"
-
-import OrderCard from "../order-card"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { Order } from "@medusajs/medusa"
+import OrderCard from "../order-card"
 
 const OrderOverview = ({ orders }: { orders: Order[] }) => {
   if (orders?.length) {
     return (
-      <div className="flex flex-col gap-y-8 w-full">
+      <div className="flex flex-col gap-y-4 w-full">
         {orders.map((o) => (
           <div
             key={o.id}

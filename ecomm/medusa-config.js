@@ -42,6 +42,7 @@ const basePlugins = [
       order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID,
       customer_created_template: process.env.SENDGRID_CUSTOMER_CREATED_ID
     },
+    
   }
 ];
 
@@ -160,5 +161,9 @@ module.exports = {
   admin: {
     path: "/",
     serve: !process.env.DISABLE_MEDUSA_ADMIN || process.env.DISABLE_MEDUSA_ADMIN === "false"
-  }
+  },
+  eventBus: {
+    resolve: "@medusajs/event-bus-local",
+  },
+
 };

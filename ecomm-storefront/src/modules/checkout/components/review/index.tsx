@@ -2,9 +2,9 @@
 
 import { Heading, Text, clx } from "@medusajs/ui"
 
+import { Cart } from "@medusajs/medusa"
 import PaymentButton from "../payment-button"
 import { useSearchParams } from "next/navigation"
-import { Cart } from "@medusajs/medusa"
 
 const Review = ({
   cart,
@@ -24,7 +24,7 @@ const Review = ({
     (cart.payment_session || paidByGiftcard)
 
   return (
-    <div className="bg-white">
+    <div className="bg-def-0">
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"

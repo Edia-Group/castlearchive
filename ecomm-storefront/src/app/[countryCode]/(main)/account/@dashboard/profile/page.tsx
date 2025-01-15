@@ -1,12 +1,11 @@
-import { Metadata } from "next"
+import { getCustomer, listRegions } from "@lib/data"
 
-import ProfilePhone from "@modules/account//components/profile-phone"
+import { Metadata } from "next"
 import ProfileBillingAddress from "@modules/account/components/profile-billing-address"
 import ProfileEmail from "@modules/account/components/profile-email"
 import ProfileName from "@modules/account/components/profile-name"
 import ProfilePassword from "@modules/account/components/profile-password"
-
-import { getCustomer, listRegions } from "@lib/data"
+import ProfilePhone from "@modules/account//components/profile-phone"
 import { notFound } from "next/navigation"
 
 export const metadata: Metadata = {
@@ -32,7 +31,7 @@ export default async function Profile() {
           your password.
         </p>
       </div>
-      <div className="flex flex-col gap-y-8 w-full">
+      <div className="flex flex-col gap-y-4 w-full">
         <ProfileName customer={customer} />
         <Divider />
         <ProfileEmail customer={customer} />

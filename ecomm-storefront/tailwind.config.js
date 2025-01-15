@@ -1,4 +1,5 @@
 const path = require("path")
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   darkMode: "class",
@@ -83,6 +84,8 @@ module.exports = {
           "Helvetica Neue",
           "Ubuntu",
           "sans-serif",
+          'var(--font-inter)',
+          ...defaultTheme.fontFamily.sans
         ],
       },
       keyframes: {
