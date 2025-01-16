@@ -62,7 +62,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
             <div className="hidden lg:block mt-8 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-32 space-y-4">
               <Heading 
                 level="h2" 
-                className="text-3xl leading-10 text-black text-center" 
+                className="text-3xl leading-10 text-black text-center font-mono" 
                 data-testid="product-title"
               >
                 {product.title}
@@ -70,7 +70,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
               {price && (
                 <div className="flex justify-center items-end gap-x-2 text-xl">
                   {price.price_type === "sale" && (
-                    <span className="line-through text-ui-fg-muted text-lg">
+                    <span className="line-through text-ui-fg-muted text-lg font-anonymous">
                       {price.original_price}
                     </span>
                   )}
@@ -127,7 +127,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
               }
             >
               <ProductActionsWrapper id={product.id} region={region} />
-              <Text className="text-medium text-black" data-testid="product-description">
+              <Text className="text-medium text-black font-mono" data-testid="product-description">
                 {product.description}
               </Text>
               <ProductTabs product={product} />

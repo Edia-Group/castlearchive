@@ -72,7 +72,7 @@ const CartDropdown = ({
 
   return (
     <div
-      className="h-full z-50"
+      className="h-full font-mono"
       onMouseEnter={openAndCancel}
       onMouseLeave={close}
     >
@@ -211,7 +211,7 @@ const CartDropdown = ({
                     <LocalizedClientLink href="/store">
                       <>
                         <span className="sr-only">Go to all products page</span>
-                        <Button onClick={close}>Explore products</Button>
+                        <Button onClick={close} className="font-mono">Explore products</Button>
                       </>
                     </LocalizedClientLink>
                   </div>

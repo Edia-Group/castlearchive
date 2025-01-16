@@ -11,7 +11,7 @@ export default async function Nav() {
 
   return (
     <div className="sticky top-0 inset-x-0 z-50 group bg-transparent">
-      <header className="relative h-20 mx-auto duration-200 "> {/* Increased height from h-16 to h-20 */}
+      <header className="relative h-20 mx-auto duration-200 ">
         <nav className="txt-xsmall-plus text-ui-fg-subtle flex items-center justify-between w-full h-full text-small-regular px-4 lg:px-24 bg-transparent">
           <div className="flex-1 basis-0 h-full flex items-center">
             <div className="h-full">
@@ -19,28 +19,28 @@ export default async function Nav() {
             </div>
           </div>
 
-          <div className="flex items-center h-full">
+          <div className="flex items-center h-full font-mono">
             <LocalizedClientLink
               href="/"
-              className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase h-full flex items-center" // Added h-full and flex items-center
+              className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase h-full flex items-center"
               data-testid="nav-store-link"
             >
-              <div className="relative h-[70px] w-[70px]"> {/* Added container with fixed dimensions */}
+              <div className="relative h-[70px] w-[70px]"> 
                 <Image 
                   src={logo}
                   alt="Castle Archive"
-                  fill // Using fill instead of fixed dimensions
-                  className="object-contain p-1" // Added padding to prevent touching borders
-                  priority // Added priority for above-the-fold image
+                  fill 
+                  className="object-contain p-1" 
+                  priority 
                 />
               </div>
             </LocalizedClientLink>
           </div>
 
           <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end">
-            <div className="hidden small:flex items-center gap-x-6 h-full">
+            <div className="hidden small:flex items-center gap-x-6 h-full ">
               <LocalizedClientLink
-                className="hover:text-ui-fg-base"
+                className="hover:text-ui-fg-base font-mono"
                 href="/account"
                 data-testid="nav-account-link"
               >
@@ -50,7 +50,7 @@ export default async function Nav() {
             <Suspense
               fallback={
                 <LocalizedClientLink
-                  className="hover:text-ui-fg-base flex gap-2"
+                  className="hover:text-ui-fg-base font-mono flex gap-2"
                   href="/cart"
                   data-testid="nav-cart-link"
                 >

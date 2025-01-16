@@ -45,7 +45,7 @@ const SideMenu = ({ regions }: { regions: Region[] | null }) => {
                 leaveFrom="opacity-100 backdrop-blur-2xl"
                 leaveTo="opacity-0"
               >
-                <Popover.Panel className="flex flex-col absolute w-full border-2 border-black pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-30 inset-x-0 bg-def-30 text-sm text-ui-fg-on-color ">
+                <Popover.Panel className="flex flex-col absolute w-full border-2 border-black sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-30 inset-x-0 bg-def-30 text-sm text-ui-fg-on-color ">
                   <div data-testid="nav-menu-popup" className="flex flex-col h-full justify-between ">
                     <div className="border-black border-b-2 bg-def-20">
                     <div className="flex justify-end p-2 " id="xmark">
@@ -77,7 +77,7 @@ const SideMenu = ({ regions }: { regions: Region[] | null }) => {
                     
                     <div className="">
                     
-                    <div className="flex flex-col gap-y-6 text-black bg-def-30">
+                    <div className="flex flex-col gap-y-6 text-black bg-def-30 px-2">
                       <div
                         className="flex justify-between"
                         onMouseEnter={toggleState.open}
@@ -96,10 +96,16 @@ const SideMenu = ({ regions }: { regions: Region[] | null }) => {
                           )}
                         />
                       </div>
-                      <Text className="flex justify-between txt-compact-small text-black">
-                        © {new Date().getFullYear()} Castle Archivs. All rights
-                        reserved.
-                      </Text>
+                      <div className="flex flex-col">
+                        <Text className="txt-compact-small text-black text-xs">
+                          © {new Date().getFullYear()} Castle Archivs. All rights
+                          reserved.
+                        </Text>
+                        
+                        <LocalizedClientLink href="/terms-of-use" className="txt-compact-small text-black text-xs hover:text-gray-500 py-1">
+                          Terms of Use
+                        </LocalizedClientLink>
+                      </div>
                     </div>
                     </div>
                     
