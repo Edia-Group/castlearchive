@@ -6,11 +6,23 @@ import { Metadata } from "next"
 import { Product } from "@medusajs/medusa"
 import { ProductCollectionWithPreviews } from "types/global"
 import { cache } from "react"
+import logo from "@assets/logo.png"
 
 export const metadata: Metadata = {
   title: "CastleArchive",
-  description:
-    "Make your ideas come to life",
+  description: "Make your ideas come to life",
+  openGraph: {
+    title: "CastleArchive",
+    description: "Make your ideas come to life",
+    images: [
+      {
+        url: logo.src,
+        width: 800,
+        height: 600,
+        alt: "CastleArchive Logo",
+      },
+    ],
+  },
 }
 
 const getCollectionsWithProducts = cache(
