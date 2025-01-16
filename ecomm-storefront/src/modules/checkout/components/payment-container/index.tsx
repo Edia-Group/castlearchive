@@ -1,12 +1,11 @@
-import { RadioGroup } from "@headlessui/react"
+import { Text, Tooltip, clx } from "@medusajs/ui"
+
 import { InformationCircleSolid } from "@medusajs/icons"
 import { PaymentSession } from "@medusajs/medusa"
-import { Text, Tooltip, clx } from "@medusajs/ui"
-import React from "react"
-
-import Radio from "@modules/common/components/radio"
-
 import PaymentTest from "../payment-test"
+import Radio from "@modules/common/components/radio"
+import { RadioGroup } from "@headlessui/react"
+import React from "react"
 
 type PaymentContainerProps = {
   paymentSession: PaymentSession
@@ -21,8 +20,11 @@ const PaymentContainer: React.FC<PaymentContainerProps> = ({
   paymentInfoMap,
   disabled = false,
 }) => {
-  const isDevelopment = process.env.NODE_ENV === "development"
-
+  const isDevelopment = process.env.NEXT_PUBLIC_APP_ENV === "development"
+  if (paymentSession.provider_id === "manual" && !isDevelopment) {
+    return null
+  }
+  
   return (
     <>
       <RadioGroup.Option

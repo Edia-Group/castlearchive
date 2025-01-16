@@ -34,7 +34,7 @@ import {
           to: data.email,
           dynamic_template_data: {
               first_name: data.first_name,
-              last_name: data.last_name,
+              last_name: data.last_name, 
           },
       });
   }
