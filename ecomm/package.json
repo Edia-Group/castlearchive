@@ -15,7 +15,7 @@
   "homepage": "/antonioecommerce-admin-test",
   "scripts": {
     "clean": "cross-env ./node_modules/.bin/rimraf dist",
-    "build:server": "cross-env npm run clean && tsc -p tsconfig.server.json",
+    "build:server": "cross-env npm run clean && tsc -p tsconfig.server.json --skipLibCheck",
     "build:dev": "cross-env npm run clean && npm run build:server && npm run build:admin",
     "build:api:prod": "cross-env npm run clean && npm run build:server",
     "build:admin": "cross-env medusa-admin build",
