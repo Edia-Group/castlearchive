@@ -108,14 +108,6 @@ const ShippingInfoTab = () => {
         </div>
         <div className="flex items-start gap-x-2">
           <Back />
-          <div>
-            <span className="font-semibold">Easy returns</span>
-            <p className="max-w-sm">
-              Just return your product and we&apos;ll refund your money. No
-              questions asked – we&apos;ll do our best to make sure your return
-              is hassle-free.
-            </p>
-          </div>
         </div>
       </div>
     </div>

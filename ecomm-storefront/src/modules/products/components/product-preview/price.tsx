@@ -6,11 +6,11 @@ export default async function PreviewPrice({ price }: { price: PriceType }) {
   return (
     <>
       {price.price_type === "sale" && (
-        <Text className="line-through text-black" data-testid="original-price">
+        <Text className="line-through text-black font-anonymous" data-testid="original-price">
           {price.original_price}
         </Text>
       )}
-      <Text className={clx("text-2xl", { "text-black": price.price_type === "sale", })} data-testid="price" >
+      <Text className={clx("text-2xl font-anonymous", { "text-black": price.price_type === "sale", })} data-testid="price" >
         {price.calculated_price}
       </Text>
     </>

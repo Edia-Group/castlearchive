@@ -63,14 +63,14 @@ const Register = ({ setCurrentView }: Props) => {
         <span className="text-center text-ui-fg-base text-small-regular mt-6">
           By creating an account, you agree to Castle Archivs&apos;s{" "}
           <LocalizedClientLink
-            href="/content/privacy-policy"
+            href="/terms-of-use"
             className="underline"
           >
             Privacy Policy
           </LocalizedClientLink>{" "}
           and{" "}
           <LocalizedClientLink
-            href="/content/terms-of-use"
+            href="/terms-of-use"
             className="underline"
           >
             Terms of Use
