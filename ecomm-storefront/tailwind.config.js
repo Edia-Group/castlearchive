@@ -87,6 +87,15 @@ module.exports = {
           'var(--font-inter)',
           ...defaultTheme.fontFamily.sans
         ],
+        mono: [
+          'var(--font-roboto-mono)',
+          'Roboto Mono',
+          ...defaultTheme.fontFamily.mono
+        ],
+        anonymous: [
+          'var(--font-anonymous-pro)', 
+          'Anonymous Pro', 'monospace'
+        ],
       },
       keyframes: {
         'grid-scroll': {

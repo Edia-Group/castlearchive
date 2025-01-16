@@ -9,7 +9,7 @@ const Layout: React.FC<{
   return (
     <div>
       <Nav />
-      <main className="relative">{children}</main>
+      <main className="relative font-mono">{children}</main>
       <Footer />
     </div>
   )

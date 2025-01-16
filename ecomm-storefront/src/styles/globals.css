@@ -75,7 +75,7 @@
   }
 
   .text-base-regular {
-    @apply text-sm leading-6 font-normal;
+    @apply text-sm leading-6 font-normal font-mono;
   }
 
   .text-base-semi {
@@ -113,6 +113,27 @@
   .text-3xl-semi {
     @apply text-[32px] leading-[44px] font-semibold;
   }
+
+  .txt-compact-medium-plus {
+    font-family: inherit !important; 
+  }
+  
+  .txt-compact-medium {
+    font-family: inherit !important; 
+  }
+
+  .txt-medium {
+    font-family: inherit !important;
+  }
+
+  .txt-xsmall-plus {
+    font-family: inherit !important;
+  }
+
+  .txt-compact-small {
+    font-family: inherit !important;
+  }
+
 }
 @keyframes gridMove {
   0% {
