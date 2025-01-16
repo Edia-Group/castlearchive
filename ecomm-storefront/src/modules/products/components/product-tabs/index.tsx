@@ -17,7 +17,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
       component: <ProductInfoTab product={product} />,
     },
     {
-      label: "Shipping & Returns",
+      label: "Shipping",
       component: <ShippingInfoTab />,
     },
   ]
@@ -105,9 +105,6 @@ const ShippingInfoTab = () => {
               product for a new one.
             </p>
           </div>
-        </div>
-        <div className="flex items-start gap-x-2">
-          <Back />
         </div>
       </div>
     </div>
