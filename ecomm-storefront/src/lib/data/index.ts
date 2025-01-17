@@ -267,6 +267,50 @@ export const getSession = cache(async function getSession() {
     .catch((err) => medusaError(err))
 })
 
+export async function generatePasswordToken(email: string) {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/customers/password-token`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email }),
+  })
+
+  if (!response.ok) {
+    throw new Error("Failed to request password reset")
+  }
+}
+
+export async function requestPasswordReset(
+  _currentState: string | null,
+  formData: FormData
+): Promise<string | null> {
+  const email = formData.get("email") as string
+
+  try {
+    await generatePasswordToken(email)
+    return null 
+  } catch (error: any) {
+    return error.toString() 
+  }
+}
+
+export async function resetPassword(email: string, password: string, token: string) {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/store/customers/password-reset`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password, token }),
+  })
+
+  if (!response.ok) {
+    throw new Error("Failed to reset password")
+  }
+
+  return response.json()
+}
+
 // Customer actions
 export async function getCustomer() {
   const headers = getMedusaHeaders(["customer"])

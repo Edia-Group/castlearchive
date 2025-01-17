@@ -1,5 +1,4 @@
 import { useFormState } from "react-dom"
-
 import { LOGIN_VIEW } from "@modules/account/templates/login-template"
 import Input from "@modules/common/components/input"
 import { logCustomerIn } from "@modules/account/actions"
@@ -39,8 +38,20 @@ const Login = ({ setCurrentView }: Props) => {
             data-testid="password-input"
           />
         </div>
+        <div className="flex items-center justify-end mt-2">
+          <button
+            type="button"
+            onClick={() => setCurrentView(LOGIN_VIEW.RESET_PASSWORD)}
+            className="text-small-regular text-ui-fg-base underline"
+            data-testid="forgot-password-button"
+          >
+            Forgot your password?
+          </button>
+        </div>
         <ErrorMessage error={message} data-testid="login-error-message" />
-        <SubmitButton data-testid="sign-in-button" className="w-full mt-6">Sign in</SubmitButton>
+        <SubmitButton data-testid="sign-in-button" className="w-full mt-6">
+          Sign in
+        </SubmitButton>
       </form>
       <span className="text-center text-ui-fg-base text-small-regular mt-6">
         Not a member?{" "}

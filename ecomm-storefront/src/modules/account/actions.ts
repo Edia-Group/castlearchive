@@ -5,7 +5,9 @@ import {
   authenticate,
   createCustomer,
   deleteShippingAddress,
+  generatePasswordToken,
   getToken,
+  resetPassword,
   updateCustomer,
   updateShippingAddress,
 } from "@lib/data"
@@ -163,6 +165,68 @@ export async function updateCustomerPassword(
     }
   }
 }
+
+export async function requestPasswordReset(
+  _currentState: unknown,
+  formData: FormData
+) {
+  const email = formData.get("email") as string
+
+  try {
+    await generatePasswordToken(email)
+    return { 
+      success: true, 
+      error: null,
+      message: "If an account exists with that email, you will receive a password reset link"
+    }
+  } catch (error: any) {
+    return { 
+      success: false, 
+      error: error.toString(),
+      message: "An error occurred while requesting password reset"
+    }
+  }
+}
+
+export async function verifyPasswordReset(
+  _currentState: unknown,
+  formData: FormData
+) {
+  const email = formData.get("email") as string
+  const password = formData.get("password") as string
+  const confirmPassword = formData.get("confirm_password") as string
+  const token = formData.get("token") as string
+
+  if (password !== confirmPassword) {
+    return { 
+      success: false, 
+      error: "Passwords do not match",
+      message: "Passwords do not match"
+    }
+  }
+
+  try {
+    await resetPassword(email, password, token)
+    
+    // After successful reset, get a new token to log the user in
+    await getToken({ email, password }).then(() => {
+      revalidateTag("customer")
+    })
+
+    return { 
+      success: true, 
+      error: null,
+      message: "Password reset successful"
+    }
+  } catch (error: any) {
+    return { 
+      success: false, 
+      error: error.toString(),
+      message: "An error occurred while resetting password"
+    }
+  }
+}
+
 
 export async function addCustomerShippingAddress(
   _currentState: Record<string, unknown>,
