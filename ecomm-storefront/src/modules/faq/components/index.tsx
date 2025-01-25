@@ -112,8 +112,8 @@ export default function FAQContent() {
               Each product is available in limited quantities (1 unit per item).
             </p>
             <p>
-              If the product you want is out of stock, you can still order it, and we will create it just for you. 
-              Please note that delivery times will be longer in such cases.
+            If the product you want is out of stock, you can contact us and have personalized product. 
+            Please note that delivery times will be longer in such cases.
             </p>
           </div>
         </FAQSection>
@@ -135,6 +135,9 @@ export default function FAQContent() {
               <li className="flex items-center">
                 <span className="w-2 h-2 bg-gray-400 rounded-full mr-2"></span>
                 We&apos;ll work together to create a unique and personalized product just for you.
+              </li>
+              <li className="flex items-center">
+                <span className="w-2 h-2 bg-gray-400 rounded-full mr-2"></span>
                 We do accept collaboration with artists and other brands
               </li>
             </ul>
