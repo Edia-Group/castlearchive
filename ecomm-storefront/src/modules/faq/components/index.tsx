@@ -1,6 +1,7 @@
 "use client"
-import { useState, useRef } from "react"
-import { Plus, Minus, Mail } from "lucide-react"
+
+import { Mail, Minus, Plus } from "lucide-react"
+import { useRef, useState } from "react"
 
 interface FAQSectionProps {
   title: string;
@@ -105,7 +106,7 @@ export default function FAQContent() {
           </div>
         </FAQSection>
 
-        <FAQSection title="Product Availability">
+        <FAQSection title="Are the products always available?">
           <div className="prose prose-sm text-gray-600">
             <p className="mb-4">
               Each product is available in limited quantities (1 unit per item).
@@ -117,7 +118,7 @@ export default function FAQContent() {
           </div>
         </FAQSection>
 
-        <FAQSection title="Personalized Products">
+        <FAQSection title="How can I request a personalized product?">
           <div className="prose prose-sm text-gray-600">
             <p className="mb-4">If you have a special idea, we can make it happen!</p>
             <ul className="space-y-2">
@@ -133,7 +134,8 @@ export default function FAQContent() {
               </li>
               <li className="flex items-center">
                 <span className="w-2 h-2 bg-gray-400 rounded-full mr-2"></span>
-                We'll work together to create a unique and personalized product just for you
+                We'll work together to create a unique and personalized product just for you.
+                We do accept collaboration with artists and other brands
               </li>
             </ul>
           </div>
