@@ -134,7 +134,7 @@ export default function FAQContent() {
               </li>
               <li className="flex items-center">
                 <span className="w-2 h-2 bg-gray-400 rounded-full mr-2"></span>
-                We'll work together to create a unique and personalized product just for you.
+                We&apos;ll work together to create a unique and personalized product just for you.
                 We do accept collaboration with artists and other brands
               </li>
             </ul>
