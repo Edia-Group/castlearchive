@@ -4,7 +4,7 @@ import SideMenu from "@modules/layout/components/side-menu"
 import { Suspense } from "react"
 import { listRegions } from "@lib/data"
 import Image from "next/image"
-import logo from "@assets/logo.png"
+import logo from "@assets/logo2.png"
 
 export default async function Nav() {
   const regions = await listRegions().then((regions) => regions)
@@ -25,7 +25,7 @@ export default async function Nav() {
               className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase h-full flex items-center"
               data-testid="nav-store-link"
             >
-              <div className="relative h-[70px] w-[70px]"> 
+              <div className="relative h-[150px] w-[150px]"> 
                 <Image 
                   src={logo}
                   alt="Castle Archive"

@@ -50,11 +50,11 @@ export default async function ProductPreview({
         </div>
         
         <div className="flex flex-col items-center w-full space-y-1"> {/* Reduced space between elements */}
-          <h3 className="text-lg sm:text-xl lg:text-2xl text-[#691C73] text-center line-clamp-2">
+          <h3 className="text-lg sm:text-xl lg:text-2xl text-[#000000] text-center line-clamp-2">
             {productPreview.title}
           </h3>
           
-          <div className="text-base sm:text-lg lg:text-xl text-[#7BA7CE]">
+          <div className="text-base sm:text-lg lg:text-xl text-[#000000]">
             {cheapestPrice && <PreviewPrice price={cheapestPrice} />}
           </div>
           
