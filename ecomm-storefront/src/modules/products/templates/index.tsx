@@ -75,7 +75,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                     </span>
                   )}
                   <span
-                    className={price.price_type === "sale" ? "text-xl-regular text-red-400" : " text-xl-regular text-blue-400"}
+                    className={price.price_type === "sale" ? "text-xl-regular text-red-400" : " text-xl-regular text-black"}
                     data-testid="product-price"
                   >
                     {price.calculated_price}
@@ -106,7 +106,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                     </span>
                   )}
                   <span
-                    className={price.price_type === "sale" ? "text-xl-regular text-red-400" : " text-xl-regular text-blue-400"}
+                    className={price.price_type === "sale" ? "text-xl-regular text-red-400" : " text-xl-regular text-black"}
                     data-testid="product-price"
                   >
                     {price.calculated_price}
@@ -127,9 +127,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
               }
             >
               <ProductActionsWrapper id={product.id} region={region} />
-              <Text className="text-medium text-black font-mono" data-testid="product-description">
-                {product.description}
-              </Text>
+           
               <ProductTabs product={product} />
             </Suspense>
           </div>

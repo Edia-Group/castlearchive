@@ -13,6 +13,11 @@ type ProductTabsProps = {
 const ProductTabs = ({ product }: ProductTabsProps) => {
   const tabs = [
     {
+      label: "Description",
+      component: <DescriptionTab desc={product.description} />
+
+    },
+    {
       label: "Product Information",
       component: <ProductInfoTab product={product} />,
     },
@@ -21,6 +26,8 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
       component: <ShippingInfoTab />,
     },
   ]
+
+  console.log(tabs[0])
 
   return (
     <div className="w-full">
@@ -108,6 +115,22 @@ const ShippingInfoTab = () => {
           </div>
         </div>
         */}
+      </div>
+    </div>
+  )
+}
+
+const DescriptionTab = ({ desc }: { desc: string | null | undefined } ) => {
+  return (
+    <div className="text-small-regular py-8">
+      <div className="grid grid-cols-1 gap-y-4">
+        <div className="flex items-start gap-x-2">
+          <div>
+            <p className="max-w-sm">
+              <pre>{desc}</pre>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   )
