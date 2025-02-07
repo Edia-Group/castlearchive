@@ -23,6 +23,7 @@ export default async function ProductPreview({
     regionId: region.id,
   }).then((product) => product)
 
+
   if (!pricedProduct) {
     return null
   }
@@ -31,6 +32,7 @@ export default async function ProductPreview({
     product: pricedProduct,
     region,
   })
+
 
   return (
     <LocalizedClientLink
@@ -50,16 +52,23 @@ export default async function ProductPreview({
         </div>
         
         <div className="flex flex-col items-center w-full space-y-1"> {/* Reduced space between elements */}
-          <h3 className="text-lg sm:text-xl lg:text-2xl text-[#691C73] text-center line-clamp-2">
+          <h3 className="text-lg sm:text-xl lg:text-2xl text-[#000000] text-center line-clamp-2">
             {productPreview.title}
           </h3>
           
-          <div className="text-base sm:text-lg lg:text-xl text-[#7BA7CE]">
+          <div className="text-base sm:text-lg lg:text-xl text-[#000000]">
             {cheapestPrice && <PreviewPrice price={cheapestPrice} />}
           </div>
           
           <div className="flex justify-center w-full mt-1"> {/* Reduced margin-top */}
             {showAddToCartButton && (
+              pricedProduct.variants[0] && pricedProduct.variants[0].inventory_quantity==0 ?
+              <ButtonProduct
+                disabled
+                buttonText="SOLD OUT"
+                textClassName="text-lg"
+                aria-label={`Add ${productPreview.title} to cart`}
+              />  :
               <ButtonProduct
                 buttonText="ADD TO CART"
                 textClassName="text-lg"
