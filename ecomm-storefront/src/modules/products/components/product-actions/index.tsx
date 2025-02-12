@@ -115,6 +115,18 @@ export default function ProductActions({
     return false
   }, [variant])
 
+  console.log("La quantità è",inStock)
+
+  const conditionalTextButton = useMemo(() => {
+    if(variants[0].inventory_quantity){
+      if(inStock && variants[0].inventory_quantity>0)
+        return "ADD TO CART" 
+      else
+        return "SOLD OUT"
+    }
+    
+  },[variants])
+
   const actionsRef = useRef<HTMLDivElement>(null)
 
   const inView = useIntersection(actionsRef, "0px")
@@ -159,6 +171,21 @@ export default function ProductActions({
           )}
         </div>
 
+       {/*(
+              inStock && pricedProduct.variants[0].inventory_quantity==0 ?
+              <ButtonProduct
+                disabled
+                buttonText="SOLD OUT"
+                textClassName="text-lg"
+                aria-label={`Add ${productPreview.title} to cart`}
+              />  :
+              <ButtonProduct
+                buttonText="ADD TO CART"
+                textClassName="text-lg"
+                aria-label={`Add ${productPreview.title} to cart`}
+              />
+       )}*/}
+
         <ButtonProduct
           onClick={handleAddToCart}
           disabled={!inStock || !variant || !!disabled || isAdding}
@@ -167,13 +194,8 @@ export default function ProductActions({
           textClassName="text-md"
           isLoading={isAdding}
           data-testid="add-product-button"
-        >
-          {!variant
-            ? "SELECT VARIANT"
-            : !inStock
-            ? "OUT OF STOCK"
-            : "ADD TO CART"}
-        </ButtonProduct>
+          buttonText= {conditionalTextButton}
+        />
         
         <MobileActions
           product={product}

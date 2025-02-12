@@ -27,8 +27,6 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
     },
   ]
 
-  console.log(tabs[0])
-
   return (
     <div className="w-full">
       <Accordion type="multiple">
