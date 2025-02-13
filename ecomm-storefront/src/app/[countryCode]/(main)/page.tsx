@@ -57,7 +57,6 @@ const getCollectionsWithProducts = cache(
         if (!collection) {
           return
         }
-
         collection.products = response.products as unknown as Product[]
       })
     )
@@ -65,6 +64,20 @@ const getCollectionsWithProducts = cache(
     return collections as unknown as ProductCollectionWithPreviews[]
   }
 )
+
+// TODO CONTINUA
+const productMetadata = async() => {
+  const response = await fetch(`http://localhost:9000/store/products?handle=Black-Magician-Hoodie`, {
+    credentials: "include",
+    headers: {
+      "x-publishable-api-key": process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY,
+    },
+  });
+
+  console.log(await response.json().then(data => data.products[0]));
+}
+
+productMetadata()
 
 export default async function Home({
   params: { countryCode },

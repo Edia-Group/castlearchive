@@ -118,15 +118,13 @@ const ShippingInfoTab = () => {
   )
 }
 
-const DescriptionTab = ({ desc }: { desc: string | null | undefined } ) => {
+const DescriptionTab = ({ desc }: { desc: string | null | undefined }) => {
   return (
     <div className="text-small-regular py-8">
       <div className="grid grid-cols-1 gap-y-4">
         <div className="flex items-start gap-x-2">
-          <div>
-            <p className="max-w-sm">
-              <pre>{desc}</pre>
-            </p>
+          <div className="max-w-sm">
+            <pre>{desc}</pre>
           </div>
         </div>
       </div>
